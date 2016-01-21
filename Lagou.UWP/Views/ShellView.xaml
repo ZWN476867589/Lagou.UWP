@@ -14,21 +14,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Background="#00BCD4" Padding="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="拉勾" Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#ccffffff" Grid.Column="1">
-                <AutoSuggestBox Grid.Column="1" 
-                            QueryIcon="Find"
-                            Style="{StaticResource NoBorderAutoSuggestBox}"
-                                Height="26"
-                            />
-            </Border>
-        </Grid>
+        <ContentControl cm:View.Model="{Binding SearchBarVM}" HorizontalContentAlignment="Stretch" />
 
         <Pivot Grid.Row="1" ItemsSource="{Binding Datas}" 
                Style="{StaticResource BottomHeaderPivot}">

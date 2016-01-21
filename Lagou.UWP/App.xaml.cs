@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Lagou.UWP.Attributes;
+using Lagou.UWP.Common;
 using Lagou.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Lagou.UWP {
 
     public sealed partial class App {
         private WinRTContainer _container;
+        private IEventAggregator _eventAggregator;
 
         public App() {
             InitializeComponent();
@@ -36,8 +38,8 @@ namespace Lagou.UWP {
         }
 
         protected override void Configure() {
-            _container = new WinRTContainer();
-            _container.RegisterWinRTServices();
+            this._container = new WinRTContainer();
+            this._container.RegisterWinRTServices();
 
             //_container
             //    .Singleton<ShellViewModel>();
@@ -55,6 +57,7 @@ namespace Lagou.UWP {
                 }
             }
 
+            this._eventAggregator = _container.GetInstance<IEventAggregator>();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
@@ -65,6 +68,14 @@ namespace Lagou.UWP {
                 statusBar.BackgroundColor = Color.FromArgb(0xff, 0x00, 0x97, 0xa7);//#0097A7
                 statusBar.BackgroundOpacity = 1;
             }
+
+            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated) {
+                _eventAggregator.PublishOnUIThread(new ResumeStateMessage());
+            }
+        }
+
+        protected override void OnSuspending(object sender, SuspendingEventArgs e) {
+            _eventAggregator.PublishOnUIThread(new SuspendStateMessage(e.SuspendingOperation));
         }
 
         protected override object GetInstance(Type service, string key) {
