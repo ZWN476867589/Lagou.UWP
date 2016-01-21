@@ -26,6 +26,14 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
+            <ListView.FooterTemplate>
+                <DataTemplate>
+                    <Button Content="加载更多" HorizontalAlignment="Stretch" 
+                            Command="{Binding LoadMoreCmd}"
+                            />
+                </DataTemplate>
+            </ListView.FooterTemplate>
         </ListView>
     </Grid>
 

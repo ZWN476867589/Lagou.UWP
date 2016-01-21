@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Lagou.UWP.ViewModels {
 
@@ -31,12 +32,25 @@ namespace Lagou.UWP.ViewModels {
 
         private INavigationService NS = null;
 
+        public ICommand LoadMoreCmd { get; set; }
+
+        public ICommand ReloadCmd { get; set; }
+
         public IndexViewModel(INavigationService ns) {
             this.NS = ns;
 
             Task.Delay(500).ContinueWith(async t => {
                 await this.LoadData();
             });
+
+
+            //this.ReloadCmd = new Command(async () => {
+            //    await this.LoadData(true);
+            //});
+
+            //this.LoadMoreCmd = new Command(async () => {
+            //    await this.LoadData(false);
+            //});
         }
 
 

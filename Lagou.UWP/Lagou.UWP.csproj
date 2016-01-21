@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attributes\RegistAttribute.cs" />
+    <Compile Include="Common\Command.cs" />
     <Compile Include="Common\ResumeStateMessage.cs" />
     <Compile Include="Common\SuspendStateMessage.cs" />
     <Compile Include="MainPage.xaml.cs">
