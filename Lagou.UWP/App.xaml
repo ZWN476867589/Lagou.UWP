@@ -1,0 +1,44 @@
+﻿<cm:CaliburnApplication
+    x:Class="Lagou.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lagou.UWP"
+    xmlns:cm="using:Caliburn.Micro"
+    RequestedTheme="Light">
+
+
+    <cm:CaliburnApplication.Resources>
+        <!--if not set Xamarin.xaml as root resource dictionary, xamarin.xaml will not apply.-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <!--Used in Pivot.xaml-->
+                    <SolidColorBrush x:Key="PivotHeaderSupLineBrush" Color="#00BCD4" />
+                    <SolidColorBrush x:Key="PivotHeaderBackgroundBrush" Color="#cc333333" />
+
+                    <FontFamily x:Key="FontAwesome">/Assets/Fonts/FontAwesome.otf#FontAwesome</FontFamily>
+                    
+                </ResourceDictionary>
+
+                <ResourceDictionary Source="Styles/Style1.xaml" />
+                <ResourceDictionary Source="Styles/Pivot.xaml" />
+                <ResourceDictionary Source="Styles/AutoSuggestBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#A7A9AC" />
+                    <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="#00BCD4" />
+
+                    <Thickness x:Key="PivotItemMargin">2,0,2,0</Thickness>
+                    <Thickness x:Key="PivotHeaderItemMargin">12,5</Thickness>
+                    <x:Double x:Key="PivotTitleFontSize">12</x:Double>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+
+    </cm:CaliburnApplication.Resources>
+
+
+
+</cm:CaliburnApplication>

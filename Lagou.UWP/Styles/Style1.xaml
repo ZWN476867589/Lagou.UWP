@@ -1,0 +1,39 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <Style x:Key="l_h1" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--次标题-->
+    <Style x:Key="l_h2" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="#444444" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--小标题-->
+    <Style x:Key="l_h3" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="#555555" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--强调-->
+    <Style x:Key="l_accent" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#fea400" />
+    </Style>
+
+    <!--文本-->
+    <Style x:Key="l_text" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#666666" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+</ResourceDictionary>
