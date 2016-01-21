@@ -6,56 +6,52 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Lagou.UWP.Common {
-    public sealed class Command : ICommand {
-
+    public class Command : ICommand {
+        private readonly Func<object, bool> canExecute;
+        private readonly Action<object> execute;
 
         public event EventHandler CanExecuteChanged;
-        /// <summary>
-        /// 需要手动触发属性改变事件
-        /// </summary>
-        public void RaiseCanExecuteChanged() {
-            if (CanExecuteChanged != null) {
-                CanExecuteChanged(this, EventArgs.Empty);
-            }
+
+        public Command(Action<object> execute) {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            this.execute = execute;
         }
 
-        /// <summary>
-        /// 决定当前绑定的Command能否被执行
-        /// true：可以被执行
-        /// false：不能被执行
-        /// </summary>
-        /// <param name="parameter">不是必须的，可以依据情况来决定，或者重写一个对应的无参函数</param>
-        /// <returns></returns>
-        public bool CanExecute(object parameter) {
-            return this.IsCanExecute == null ? true : this.IsCanExecute(parameter);
+        public Command(Action execute)
+          : this((Action<object>)(o => execute())) {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
         }
 
-        /// <summary>
-        /// 用于执行对应的命令，只有在CanExecute可以返回true的情况下才可以被执行
-        /// </summary>
-        /// <param name="parameter"></param>
+        public Command(Action<object> execute, Func<object, bool> canExecute)
+          : this(execute) {
+            if (canExecute == null)
+                throw new ArgumentNullException("canExecute");
+            this.canExecute = canExecute;
+        }
+
+        public Command(Action execute, Func<bool> canExecute)
+          : this((Action<object>)(o => execute()), (Func<object, bool>)(o => canExecute())) {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            if (canExecute == null)
+                throw new ArgumentNullException("canExecute");
+        }
+
         public void Execute(object parameter) {
-            try {
-                this.Action(parameter);
-            } catch (Exception ex) {
-
-            }
+            this.execute(parameter);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Action<Object> Action { get; set; }
-        public Func<Object, bool> IsCanExecute { get; set; }
+        public bool CanExecute(object parameter) {
+            if (this.canExecute != null)
+                return this.canExecute(parameter);
+            return true;
+        }
 
-        /// <summary>
-        /// 构造函数，用于初始化
-        /// </summary>
-        /// <param name="execute"></param>
-        /// <param name="canExecute"></param>
-        public Command(Action<Object> execute, Func<Object, bool> canExecute) {
-            this.Action = execute;
-            this.IsCanExecute = canExecute;
+        public void ChangeCanExecute() {
+            if (this.CanExecuteChanged != null)
+                this.CanExecuteChanged(this, EventArgs.Empty);
         }
     }
 }

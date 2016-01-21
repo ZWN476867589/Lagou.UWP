@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace Lagou.UWP.ViewModels {
     public abstract class BaseVM : Screen {
 
-        private bool isBusy = false;
+        private bool _isBusy = false;
         public bool IsBusy {
             get {
-                return this.isBusy;
+                return this._isBusy;
             }
             set {
-                this.isBusy = value;
-                this.NotifyOfPropertyChange(() => this.isBusy);
+                this._isBusy = value;
+                this.NotifyOfPropertyChange(() => this.IsBusy);
             }
         }
     }

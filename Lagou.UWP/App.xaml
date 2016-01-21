@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Lagou.UWP"
     xmlns:cm="using:Caliburn.Micro"
+    xmlns:common="using:Lagou.UWP.Common"
     RequestedTheme="Light">
 
 
@@ -17,7 +18,8 @@
                     <SolidColorBrush x:Key="PivotHeaderBackgroundBrush" Color="#cc333333" />
 
                     <FontFamily x:Key="FontAwesome">/Assets/Fonts/FontAwesome.otf#FontAwesome</FontFamily>
-                    
+
+                    <common:BoolToVisibilityConverter x:Key="bool2Visibility" />
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="Styles/Style1.xaml" />

@@ -21,7 +21,10 @@
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <PivotItem>
-                        <ContentControl cm:View.Model="{Binding}" HorizontalContentAlignment="Stretch" />
+                        <ContentControl cm:View.Model="{Binding}" 
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        />
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>

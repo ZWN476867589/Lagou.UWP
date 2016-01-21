@@ -2,6 +2,7 @@
 using Lagou.API;
 using Lagou.API.Methods;
 using Lagou.UWP.Attributes;
+using Lagou.UWP.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,18 +40,17 @@ namespace Lagou.UWP.ViewModels {
         public IndexViewModel(INavigationService ns) {
             this.NS = ns;
 
+            this.ReloadCmd = new Command(async () => {
+                await this.LoadData(true);
+            });
+
+            this.LoadMoreCmd = new Command(async () => {
+                await this.LoadData(false);
+            });
+
             Task.Delay(500).ContinueWith(async t => {
                 await this.LoadData();
             });
-
-
-            //this.ReloadCmd = new Command(async () => {
-            //    await this.LoadData(true);
-            //});
-
-            //this.LoadMoreCmd = new Command(async () => {
-            //    await this.LoadData(false);
-            //});
         }
 
 

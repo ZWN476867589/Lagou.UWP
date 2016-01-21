@@ -12,7 +12,7 @@ namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.PreRequest)]
     public class ShellViewModel : Screen {
 
-        private readonly IEventAggregator _eventAggregator;
+        //private readonly IEventAggregator _eventAggregator;
 
         public BindableCollection<BaseVM> Datas { get; set; } = new BindableCollection<BaseVM>();
 

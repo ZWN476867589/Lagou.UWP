@@ -29,12 +29,32 @@
 
             <ListView.FooterTemplate>
                 <DataTemplate>
-                    <Button Content="加载更多" HorizontalAlignment="Stretch" 
+                    <Grid Padding="5">
+                        <Button Content="加载更多" HorizontalAlignment="Stretch" 
                             Command="{Binding LoadMoreCmd}"
                             />
+
+                        <ProgressRing
+                              Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                              IsActive="{Binding IsBusy}"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              VerticalContentAlignment="Center"
+                              HorizontalContentAlignment="Center"
+                              />
+                    </Grid>
                 </DataTemplate>
             </ListView.FooterTemplate>
         </ListView>
+
+        <ProgressRing Width="50" Height="50" 
+                      Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                      IsActive="{Binding IsBusy}"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"
+                      />
     </Grid>
 
 </Page>
