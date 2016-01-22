@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,8 +16,15 @@ using Windows.UI.Xaml.Navigation;
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Lagou.UWP.Views {
-    public sealed partial class SearchedItemView : UserControl {
-        public SearchedItemView() {
+    public sealed partial class RootView : Page {
+
+        public Frame Frm {
+            get {
+                return this.frm;
+            }
+        }
+
+        public RootView() {
             this.InitializeComponent();
         }
     }

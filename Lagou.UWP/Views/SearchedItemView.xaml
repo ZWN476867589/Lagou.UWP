@@ -5,11 +5,13 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cm="using:Caliburn.Micro"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
+    cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"
     >
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

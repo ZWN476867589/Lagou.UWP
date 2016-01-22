@@ -2,6 +2,7 @@
 using Lagou.UWP.Attributes;
 using Lagou.UWP.Common;
 using Lagou.UWP.ViewModels;
+using Lagou.UWP.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,20 +31,16 @@ namespace Lagou.UWP {
 
         public App() {
             InitializeComponent();
-            this.UnhandledException += App_UnhandledException;
-        }
-
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
-            e.Handled = true;
         }
 
         protected override void Configure() {
             this._container = new WinRTContainer();
             this._container.RegisterWinRTServices();
+            this.RegistInstances(this._container);
+            this._eventAggregator = _container.GetInstance<IEventAggregator>();
+        }
 
-            //_container
-            //    .Singleton<ShellViewModel>();
-
+        private void RegistInstances(SimpleContainer _container) {
             var types = this.GetType().GetTypeInfo().Assembly.DefinedTypes
                 .Select(t => new { T = t, Mode = t.GetCustomAttribute<RegistAttribute>()?.Mode })
                 .Where(o => o.Mode != null && o.Mode != InstanceMode.None);
@@ -56,10 +53,12 @@ namespace Lagou.UWP {
                     _container.RegisterPerRequest(type, null, type);
                 }
             }
-
-            this._eventAggregator = _container.GetInstance<IEventAggregator>();
         }
 
+        /// <summary>
+        /// fire before configure
+        /// </summary>
+        /// <param name="args"></param>
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
             this.DisplayRootViewFor<ShellViewModel>();
 
@@ -89,6 +88,7 @@ namespace Lagou.UWP {
         protected override void BuildUp(object instance) {
             _container.BuildUp(instance);
         }
+
 
 
         protected override void OnUnhandledException(object sender, UnhandledExceptionEventArgs e) {

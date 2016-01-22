@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Lagou.UWP.ViewModels {
 
-    [Regist(InstanceMode.PreRequest)]
+    [Regist(InstanceMode.Singleton)]
     public class ShellViewModel : Screen {
 
         //private readonly IEventAggregator _eventAggregator;
