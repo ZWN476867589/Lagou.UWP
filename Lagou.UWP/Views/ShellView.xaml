@@ -17,7 +17,8 @@
         <ContentControl cm:View.Model="{Binding SearchBarVM}" HorizontalContentAlignment="Stretch" />
 
         <Pivot Grid.Row="1" ItemsSource="{Binding Datas}" 
-               Style="{StaticResource BottomHeaderPivot}">
+               Style="{StaticResource BottomHeaderPivot}"
+               >
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <PivotItem>

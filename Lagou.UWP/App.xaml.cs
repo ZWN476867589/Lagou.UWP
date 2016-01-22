@@ -38,8 +38,6 @@ namespace Lagou.UWP {
             this._container.RegisterWinRTServices();
             this.RegistInstances(this._container);
             this._eventAggregator = _container.GetInstance<IEventAggregator>();
-
-            this._container.RegisterNavigationService(this.RootFrame);
         }
 
         private void RegistInstances(SimpleContainer _container) {
@@ -57,10 +55,8 @@ namespace Lagou.UWP {
             }
         }
 
-        protected override Frame CreateApplicationFrame() {
-            var frame = new Frame();
-            Window.Current.Content = frame;
-            return frame;
+        protected override void PrepareViewFirst(Frame frame) {
+            var ns = this._container.RegisterNavigationService(frame);
         }
 
         /// <summary>
@@ -68,9 +64,6 @@ namespace Lagou.UWP {
         /// </summary>
         /// <param name="args"></param>
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
-            //this.DisplayRootViewFor<RootViewModel>();
-
-            this.PrepareViewFirst();
             this.DisplayRootView<ShellView>();
 
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) {

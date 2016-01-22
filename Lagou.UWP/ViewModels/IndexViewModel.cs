@@ -27,7 +27,6 @@ namespace Lagou.UWP.ViewModels {
         }
 
         public BindableCollection<SearchedItemViewModel> Datas { get; set; }
-        = new BindableCollection<SearchedItemViewModel>();
 
         private int Page = 1;
 
@@ -36,6 +35,7 @@ namespace Lagou.UWP.ViewModels {
         public ICommand LoadMoreCmd { get; set; }
 
         public ICommand ReloadCmd { get; set; }
+
 
         public IndexViewModel(INavigationService ns) {
             this.NS = ns;
@@ -47,15 +47,18 @@ namespace Lagou.UWP.ViewModels {
             this.LoadMoreCmd = new Command(async () => {
                 await this.LoadData(false);
             });
-
-            Task.Delay(500).ContinueWith(async t => {
-                await this.LoadData();
-            });
         }
 
 
         protected override void OnActivate() {
             base.OnActivate();
+
+            if (this.Datas == null) {
+                this.Datas = new BindableCollection<SearchedItemViewModel>();
+                Task.Delay(500).ContinueWith(async t => {
+                    await this.LoadData();
+                });
+            }
         }
 
         private async Task LoadData(bool reload = false) {

@@ -5,6 +5,7 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
     >
 
@@ -16,7 +17,9 @@
     </Page.BottomAppBar>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          common:UniMargin.Margin="2"
+          >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -47,8 +50,8 @@
 
             <!--职位详情-->
             <ScrollViewer>
-                <StackPanel>
-                    <Grid>
+                <StackPanel common:UniMargin.Margin="2">
+                    <Grid common:UniMargin.Margin="2">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />

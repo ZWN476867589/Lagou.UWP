@@ -7,9 +7,9 @@
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Newtonsoft.Json": "8.0.2"
-    ,
-    "XamlSpy": "3.0.1-preview",
-    "XamlSpyLibs": "3.0.1-preview"
+    //,
+    //"XamlSpy": "3.0.1-preview",
+    //"XamlSpyLibs": "3.0.1-preview"
   },
   "frameworks": {
     "uap10.0": {}

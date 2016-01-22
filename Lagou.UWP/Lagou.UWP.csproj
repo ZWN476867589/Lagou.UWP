@@ -104,6 +104,7 @@
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\ResumeStateMessage.cs" />
     <Compile Include="Common\SuspendStateMessage.cs" />
+    <Compile Include="Common\UniMargin.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
