@@ -15,30 +15,21 @@ namespace Lagou.UWP.ViewModels {
 
         public SearchBarViewModel SearchBarVM { get; set; } = new SearchBarViewModel();
 
-        /// <summary>
-        /// 1
-        /// </summary>
-        /// <param name="view"></param>
-        /// <param name="context"></param>
-        protected override void OnViewAttached(object view, object context) {
-            base.OnViewAttached(view, context);
+        private WinRTContainer Container = null;
+
+        public RootViewModel(WinRTContainer container) {
+            this.Container = container;
         }
 
-        /// <summary>
-        /// 2
-        /// </summary>
-        /// <param name="view"></param>
-        protected override void OnViewReady(object view) {
-            base.OnViewReady(view);
-        }
+        public void FrameLoaded(Frame frm) {
+            var ns = this.Container.RegisterNavigationService(frm);
 
+            //ns.For<ShellViewModel>()
+            //    .Navigate();
 
-        /// <summary>
-        /// 3
-        /// </summary>
-        /// <param name="view"></param>
-        protected override void OnViewLoaded(object view) {
-            base.OnViewLoaded(view);
+            var m = ViewLocator.LocateTypeForModelType(typeof(ShellViewModel), null, null);
+            ns.For<ShellViewModel>()
+                .Navigate();
         }
     }
 }

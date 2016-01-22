@@ -5,9 +5,131 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    >
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar Background="#cc999999">
+            <AppBarButton Icon="Favorite" Label="收藏到本地" />
+            <AppBarButton Icon="List" Label="所有职位" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding Data.CompanyLogo}" Width="80" Height="80" />
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Data.CompanyName}" Style="{StaticResource l_h1}" />
+                <TextBlock Text="{Binding Data.CompanyDesc}" Style="{StaticResource l_text}" />
+            </StackPanel>
+        </Grid>
+
+        <!--职位名称-->
+        <Border Background="#aaefefef" BorderBrush="#999999" BorderThickness="0.5" CornerRadius="3" Padding="5" Grid.Row="2">
+            <TextBlock Text="{Binding Data.JobTitle}" Style="{StaticResource l_h2}" />
+        </Border>
+
+
+        <FlipView Grid.Row="3" Background="Transparent">
+
+            <!--职位详情-->
+            <ScrollViewer>
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <!--薪水-->
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <FontIcon Glyph="&#xf157;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}" FontSize="12" />
+                            <TextBlock Text="{Binding Data.Salary}" Style="{StaticResource l_text}" />
+                        </StackPanel>
+
+                        <!--工作地点-->
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <FontIcon Glyph="&#xf279;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                            <TextBlock Text="{Binding Data.WorkAddress}" Style="{StaticResource l_text}" />
+                        </StackPanel>
+
+                        <!--全/兼职-->
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+                            <FontIcon Glyph="&#xf0c0;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                            <TextBlock Text="{Binding Data.JobNature}" Style="{StaticResource l_text}" />
+                        </StackPanel>
+
+                        <!--工作年限-->
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                            <FontIcon Glyph="&#xf017;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                            <TextBlock Text="{Binding Data.WorkYear}" Style="{StaticResource l_text}" />
+                        </StackPanel>
+
+                        <!--学历-->
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <FontIcon Glyph="&#xf19d;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                            <TextBlock Text="{Binding Data.Education}" Style="{StaticResource l_text}" />
+                        </StackPanel>
+
+                    </Grid>
+
+                    <Rectangle Style="{StaticResource b_h}" />
+
+                    <!--职位诱惑-->
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xf19c;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                        <TextBlock Text="{Binding Data.Temptation}" Style="{StaticResource l_h3}" />
+                    </StackPanel>
+
+                    <Rectangle Style="{StaticResource b_h}" />
+
+                    <!--公司地址-->
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xf041;" Style="{StaticResource fi_small}" FontFamily="{StaticResource FontAwesome}"  FontSize="12" />
+                        <TextBlock Text="{Binding Data.CompanyAddress}" Style="{StaticResource l_text}" />
+                    </StackPanel>
+
+
+                    <Rectangle Style="{StaticResource b_h}" />
+
+                    <!--职位描述-->
+                    <TextBlock Text="{Binding Data.JobDesc}" Style="{StaticResource l_text}" />
+
+                </StackPanel>
+            </ScrollViewer>
+            <!--//职位详情-->
+
+            <!--评论-->
+            <ScrollViewer>
+                <Grid>
+                    <TextBlock Text="当前无评论" 
+                        Visibility="{Binding NotHaveEvaluations, Converter={StaticResource bool2Visibility}}" 
+                        Style="{StaticResource l_h1}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                    />
+                </Grid>
+            </ScrollViewer>
+            <!--//评论-->
+        </FlipView>
 
     </Grid>
 </Page>

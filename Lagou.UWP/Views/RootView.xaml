@@ -18,9 +18,11 @@
 
         <ContentControl cm:View.Model="{Binding SearchBarVM}" HorizontalContentAlignment="Stretch" />
 
-        <!--<Frame Grid.Row="1" cm:Message.Attach="[Event Loaded] = [Action FrameLoaded($source)]">-->
-        <Frame Grid.Row="1" x:Name="frm">
-
+        <!--<Frame Grid.Row="1" x:Name="frm">-->
+        <Frame Grid.Row="1" 
+               Background="Green"
+               cm:Message.Attach="[Event Loaded] = [Action FrameLoaded($source)]" >
+            
         </Frame>
     </Grid>
 </Page>

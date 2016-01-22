@@ -19,6 +19,8 @@
 
                     <FontFamily x:Key="FontAwesome">/Assets/Fonts/FontAwesome.otf#FontAwesome</FontFamily>
 
+                    <SolidColorBrush x:Key="T" Color="Green" />
+
                     <common:BoolToVisibilityConverter x:Key="bool2Visibility" />
                 </ResourceDictionary>
 

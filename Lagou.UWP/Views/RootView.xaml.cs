@@ -18,11 +18,11 @@ using Windows.UI.Xaml.Navigation;
 namespace Lagou.UWP.Views {
     public sealed partial class RootView : Page {
 
-        public Frame Frm {
-            get {
-                return this.frm;
-            }
-        }
+        //public Frame Frm {
+        //    get {
+        //        return this.frm;
+        //    }
+        //}
 
         public RootView() {
             this.InitializeComponent();
