@@ -5,11 +5,14 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cm="using:Caliburn.Micro"
+    xmlns:common="using:Lagou.UWP.Common"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-   
+
     <Grid Background="#00BCD4" Padding="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -18,11 +21,39 @@
         <TextBlock Text="拉勾" Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="#ccffffff" Grid.Column="1">
-            <AutoSuggestBox Grid.Column="1" 
+            <Grid Height="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Background="Transparent" 
+                        FontSize="10"
+                        VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding City}" />
+                        <FontIcon FontFamily="{StaticResource FontAwesome}" 
+                                  Glyph="&#xf107;"
+                                  FontSize="12"
+                                  Margin="5,0,0,0"
+                                  />
+                    </StackPanel>
+
+                    <Button.Flyout>
+                        <Flyout FlyoutPresenterStyle="{StaticResource flayout}">
+                            <i:Interaction.Behaviors>
+                                <common:FlyoutBehavior IsClosed="{Binding NeedCloseCitySelector, Mode=TwoWay}" />
+                            </i:Interaction.Behaviors>
+                            
+                            <ContentControl cm:View.Model="{Binding CitySelectorVM}" />
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <AutoSuggestBox Grid.Column="1"                        
                             QueryIcon="Find"
                             Style="{StaticResource NoBorderAutoSuggestBox}"
-                                Height="26"
+                                VerticalAlignment="Stretch"
                             />
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

@@ -16,15 +16,8 @@ using Windows.UI.Xaml.Navigation;
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Lagou.UWP.Views {
-    public sealed partial class RootView : Page {
-
-        //public Frame Frm {
-        //    get {
-        //        return this.frm;
-        //    }
-        //}
-
-        public RootView() {
+    public sealed partial class CitySelectorView : UserControl {
+        public CitySelectorView() {
             this.InitializeComponent();
         }
     }

@@ -16,10 +16,12 @@ namespace Lagou.UWP.ViewModels {
 
         public BindableCollection<BaseVM> Datas { get; set; } = new BindableCollection<BaseVM>();
 
-        public SearchBarViewModel SearchBarVM { get; set; } = new SearchBarViewModel();
+        public SearchBarViewModel SearchBarVM { get; set; }
 
         public ShellViewModel(SimpleContainer container, IEventAggregator eventAggregator) {
             this._eventAggregator = eventAggregator;
+
+            this.SearchBarVM = container.GetInstance<SearchBarViewModel>();
 
             this.Datas.CollectionChanged += Datas_CollectionChanged;
 
