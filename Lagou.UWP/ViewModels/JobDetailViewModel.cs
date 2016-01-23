@@ -14,9 +14,10 @@ namespace Lagou.UWP.ViewModels {
 
     [Regist(InstanceMode.Singleton)]
     public class JobDetailViewModel : BasePageVM {
+        private string _title = "职位详情";
         public override string Title {
             get {
-                return "职位详情";
+                return this._title;
             }
         }
 
@@ -42,9 +43,11 @@ namespace Lagou.UWP.ViewModels {
                     this.id = value;
                     this.Data = null;
                     this.Evaluations.Clear();
+                    this._title = "职位详情";
                     //When ID changed, clear exists data.
                     this.NotifyOfPropertyChange(() => this.Data);
                     this.NotifyOfPropertyChange(() => this.Evaluations);
+                    this.NotifyOfPropertyChange(() => this.Title);
                 }
             }
         }
@@ -93,6 +96,11 @@ namespace Lagou.UWP.ViewModels {
             };
             this.Data = await API.ApiClient.Execute(mth);
             this.NotifyOfPropertyChange(() => this.Data);
+
+            if (this.Data != null) {
+                this._title = $"{Data.JobTitle} - {Data.CompanyName}";
+                this.NotifyOfPropertyChange(() => this.Title);
+            }
 
             var mth2 = new EvaluationList() {
                 PositionID = this.ID

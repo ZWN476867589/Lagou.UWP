@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
-    common:TopHeader.Title="职位详情"
+    common:TopHeader.Title="{Binding Title}"
     >
 
     <Page.BottomAppBar>

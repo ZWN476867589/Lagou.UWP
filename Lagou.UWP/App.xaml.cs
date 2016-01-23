@@ -89,8 +89,17 @@ namespace Lagou.UWP {
                 };
                 header.SetBinding(FrameworkElement.DataContextProperty, binding);
             } else {
-                this._rootFrameVM.Header = title;
+                var exp = ele.GetBindingExpression(TopHeader.TitleProperty);
+                if (exp != null) {
+                    ele.RegisterPropertyChangedCallback(TopHeader.TitleProperty, TitleChanged);
+                } else
+                    this._rootFrameVM.Header = title;
             }
+        }
+
+        private void TitleChanged(DependencyObject sender, DependencyProperty dp) {
+            var title = sender.GetValue(TopHeader.TitleProperty);
+            this._rootFrameVM.Header = title;
         }
 
 
