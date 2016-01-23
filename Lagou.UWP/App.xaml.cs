@@ -29,6 +29,8 @@ namespace Lagou.UWP {
         private WinRTContainer _container;
         private IEventAggregator _eventAggregator;
 
+        private RootFrameViewModel _rootFrameVM = null;
+
         public App() {
             InitializeComponent();
         }
@@ -58,6 +60,39 @@ namespace Lagou.UWP {
         protected override void PrepareViewFirst(Frame frame) {
             var ns = this._container.RegisterNavigationService(frame);
         }
+
+        protected override Frame CreateApplicationFrame() {
+            var view = new RootFrameView();
+            Window.Current.Content = view;
+
+            var model = ViewModelLocator.LocateForView(view);
+            ViewModelBinder.Bind(model, view, null);
+            this._rootFrameVM = (RootFrameViewModel)model;
+
+            view.Frm.Navigated += Frm_Navigated;
+
+            //Must set frame's datacontext as null
+            //if not set null, will show nothing.
+            view.Frm.DataContext = null;
+            return view.Frm;
+        }
+
+        private void Frm_Navigated(object sender, NavigationEventArgs e) {
+            var ele = (Page)e.Content;
+            var header = TopHeader.GetContent(ele);
+            var title = TopHeader.GetTitle(ele);
+            if (header != null) {
+                this._rootFrameVM.Header = header;
+                var binding = new Binding() {
+                    Source = ele,
+                    Path = new PropertyPath("DataContext"),
+                };
+                header.SetBinding(FrameworkElement.DataContextProperty, binding);
+            } else {
+                this._rootFrameVM.Header = title;
+            }
+        }
+
 
         /// <summary>
         /// fire before configure

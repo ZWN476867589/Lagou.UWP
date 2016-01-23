@@ -109,6 +109,8 @@
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\FlyoutBehavior.cs" />
+    <Compile Include="Common\HeaderTemplateSelector.cs" />
+    <Compile Include="Common\TopHeader.cs" />
     <Compile Include="Common\ResumeStateMessage.cs" />
     <Compile Include="Common\SuspendStateMessage.cs" />
     <Compile Include="Common\UniMargin.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="ViewModels\CitySelectorViewModel.cs" />
     <Compile Include="ViewModels\EvaluationViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
+    <Compile Include="ViewModels\RootFrameViewModel.cs" />
     <Compile Include="ViewModels\SearchBarViewModel.cs" />
     <Compile Include="ViewModels\SearchedItemViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
@@ -137,6 +140,9 @@
     </Compile>
     <Compile Include="Views\JobDetailView.xaml.cs">
       <DependentUpon>JobDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RootFrameView.xaml.cs">
+      <DependentUpon>RootFrameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchBarView.xaml.cs">
       <DependentUpon>SearchBarView.xaml</DependentUpon>
@@ -204,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JobDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RootFrameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,7 @@
     d:DesignWidth="400">
 
 
-    <Grid Background="#00BCD4" Padding="10">
+    <Grid Background="{StaticResource HeaderBrush}" Padding="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />

@@ -18,6 +18,8 @@ namespace Lagou.UWP.ViewModels {
 
         public SearchBarViewModel SearchBarVM { get; set; }
 
+        public object SelectedItem { get; set; }
+
         public ShellViewModel(SimpleContainer container, IEventAggregator eventAggregator) {
             this._eventAggregator = eventAggregator;
 

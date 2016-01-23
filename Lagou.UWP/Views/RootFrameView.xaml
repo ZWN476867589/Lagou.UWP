@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="Lagou.UWP.Views.RootFrameView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lagou.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cm="using:Caliburn.Micro"
+    xmlns:common="using:Lagou.UWP.Common"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Background="White" Margin="{Binding Margin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ContentControl Content="{Binding Header}" HorizontalContentAlignment="Stretch">
+            <ContentControl.ContentTemplateSelector>
+                <common:HeaderTemplateSelector>
+                    <common:HeaderTemplateSelector.TitleTemplate>
+                        <DataTemplate>
+                            <Grid Background="{StaticResource HeaderBrush}" Padding="5,10">
+                                <TextBlock Text="{Binding}" Foreground="White" />
+                            </Grid>
+                        </DataTemplate>
+                    </common:HeaderTemplateSelector.TitleTemplate>
+                </common:HeaderTemplateSelector>
+            </ContentControl.ContentTemplateSelector>
+        </ContentControl>
+
+
+        <Frame x:Name="frm" Grid.Row="1" />
+    </Grid>
+</UserControl>
