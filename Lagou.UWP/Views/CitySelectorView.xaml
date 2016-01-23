@@ -14,14 +14,14 @@
     x:Name="root"
     >
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <CollectionViewSource x:Key="GroupdSources"
             Source="{Binding Datas}" 
             IsSourceGrouped="True"
             ItemsPath="Value"
         />
 
-    </UserControl.Resources>
+    </UserControl.Resources>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -33,31 +33,55 @@
             <SymbolIcon Symbol="Cancel" Foreground="White" />
         </Button>
 
-        <ListView ItemsSource="{Binding Source={StaticResource GroupdSources}}" 
+        <ScrollViewer Grid.Row="1">
+            <SemanticZoom>
+                <SemanticZoom.ZoomedInView>
+                    <ListView ItemsSource="{Binding Datas.View}" 
                   cm:Message.Attach="[Event SelectionChanged] = [Action Choice($this)]"
-                  Grid.Row="1">
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Key}" Style="{ThemeResource TitleTextBlockStyle}"/>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
+                  >
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Key}" 
+                                               Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
 
-                </GroupStyle>
-            </ListView.GroupStyle>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
 
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Foreground="White" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Foreground="White" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+
+                <SemanticZoom.ZoomedOutView>
+                    <GridView ItemsSource="{Binding Datas.View.CollectionGroups}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Group.Key}" />
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid  MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

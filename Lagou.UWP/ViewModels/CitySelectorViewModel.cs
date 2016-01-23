@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml.Data;
 
 namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
@@ -15,23 +16,28 @@ namespace Lagou.UWP.ViewModels {
         public event EventHandler OnCancel = null;
         public event EventHandler<ChoicedCityEventArgs> OnChoiced = null;
 
-        public Dictionary<char, List<City>> Datas {
-            get;
-            set;
-        }
+        //public Dictionary<char, List<City>> Datas {
+        //    get;
+        //    set;
+        //}
 
-        public BindableCollection<City> Datas2 { get; set; }
+        public CollectionViewSource Datas { get; set; }
+
 
         public ICommand CancelCmd {
             get; set;
         }
 
         public CitySelectorViewModel() {
-            var datas = Cities.Items.GroupBy(i => i.PY.ToUpper()[0])
-             .ToDictionary(g => g.Key, g => g.ToList());
+            //var datas = Cities.Items.GroupBy(i => i.PY.ToUpper()[0])
+            // .ToDictionary(g => g.Key, g => g.ToList());
 
-            this.Datas = datas;
-            this.Datas2 = new BindableCollection<City>(Cities.Items);
+            //this.Datas = datas;
+            //this.Datas2 = new BindableCollection<City>(Cities.Items);
+            this.Datas = new CollectionViewSource() {
+                IsSourceGrouped = true,
+                Source = Cities.Items.GroupBy(i => i.PY.ToUpper()[0]).OrderBy(g => g.Key)
+            };
 
             this.CancelCmd = new Command(() => {
                 if (this.OnCancel != null)
