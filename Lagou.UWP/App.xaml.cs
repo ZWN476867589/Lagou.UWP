@@ -58,7 +58,7 @@ namespace Lagou.UWP {
         }
 
         protected override void PrepareViewFirst(Frame frame) {
-            var ns = this._container.RegisterNavigationService(frame);
+            this._container.RegisterNavigationService(frame);
         }
 
         protected override Frame CreateApplicationFrame() {
@@ -83,17 +83,17 @@ namespace Lagou.UWP {
             var title = TopHeader.GetTitle(ele);
             if (header != null) {
                 this._rootFrameVM.Header = header;
-                var binding = new Binding() {
-                    Source = ele,
-                    Path = new PropertyPath("DataContext"),
-                };
-                header.SetBinding(FrameworkElement.DataContextProperty, binding);
+                //var binding = new Binding() {
+                //    Source = ele,
+                //    Path = new PropertyPath("DataContext"),
+                //};
+                //header.SetBinding(FrameworkElement.DataContextProperty, binding);
             } else {
-                var exp = ele.GetBindingExpression(TopHeader.TitleProperty);
-                if (exp != null) {
-                    ele.RegisterPropertyChangedCallback(TopHeader.TitleProperty, TitleChanged);
-                } else
-                    this._rootFrameVM.Header = title;
+                //var exp = ele.GetBindingExpression(TopHeader.TitleProperty);
+                //if (exp != null) {
+                //    ele.RegisterPropertyChangedCallback(TopHeader.TitleProperty, TitleChanged);
+                //} else
+                this._rootFrameVM.Header = title;
             }
         }
 

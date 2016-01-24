@@ -7,8 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
-    common:TopHeader.Title="{Binding Title}"
     >
+
+    <!--common:TopHeader.Title="{Binding Source={StaticResource Proxy}, Path=Data.Title}"-->
+
+    <Page.Resources>
+        <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
+    </Page.Resources>
+    
+    <common:TopHeader.Title>
+        <x:String>
+            {Binding Source={StaticResource Proxy}, Path=Data.Title}
+        </x:String>
+    </common:TopHeader.Title>
 
     <Page.BottomAppBar>
         <CommandBar Background="#cc999999">

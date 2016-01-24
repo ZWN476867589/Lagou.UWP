@@ -9,23 +9,18 @@
     xmlns:common="using:Lagou.UWP.Common"
     x:Name="root"
     mc:Ignorable="d">
-
-    <common:TopHeader.Content>
-        <ContentControl cm:View.Model="{Binding SearchBarVM}"
-                        HorizontalContentAlignment="Stretch" />
-    </common:TopHeader.Content>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <!--<ContentControl cm:View.Model="{Binding SearchBarVM}" HorizontalContentAlignment="Stretch" />-->
-
         <Pivot Grid.Row="1" ItemsSource="{Binding Datas}" 
                Style="{StaticResource BottomHeaderPivot}"
+               SelectionChanged="Pivot_SelectionChanged"
+               cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"
                >
+            <!--$view shellView-->
+            <!--source pivot-->
+            <!--$executionContext ActionExecutionContext-->
+            <!--$this pivot item's ViewModel, first is null-->
+            <!--dataContext ViewModel-->
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <PivotItem>

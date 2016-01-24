@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace Lagou.UWP.ViewModels {
 
@@ -16,14 +17,10 @@ namespace Lagou.UWP.ViewModels {
 
         public BindableCollection<BaseVM> Datas { get; set; } = new BindableCollection<BaseVM>();
 
-        public SearchBarViewModel SearchBarVM { get; set; }
-
-        public object SelectedItem { get; set; }
+        private RootFrameViewModel _rootFrameVM = null;
 
         public ShellViewModel(SimpleContainer container, IEventAggregator eventAggregator) {
             this._eventAggregator = eventAggregator;
-
-            this.SearchBarVM = container.GetInstance<SearchBarViewModel>();
 
             this.Datas.CollectionChanged += Datas_CollectionChanged;
 
@@ -31,6 +28,8 @@ namespace Lagou.UWP.ViewModels {
             this.Datas.Add(container.GetInstance<SearchViewModel>());
             this.Datas.Add(container.GetInstance<MyViewModel>());
             this.Datas.Add(container.GetInstance<LocalFavoriteViewModel>());
+
+            this._rootFrameVM = container.GetInstance<RootFrameViewModel>();
         }
 
         private void Datas_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
@@ -52,6 +51,15 @@ namespace Lagou.UWP.ViewModels {
         protected override void OnActivate() {
             _eventAggregator.Subscribe(this);
             base.OnActivate();
+        }
+
+        public void ChangeHeader(Pivot pivot) {
+            var model = pivot.SelectedItem;
+            var view = ViewLocator.LocateForModel(model, null, null);
+            var headerContent = view.GetValue(TopHeader.ContentProperty);
+            var headerTitle = view.GetValue(TopHeader.TitleProperty);
+
+            this._rootFrameVM.Header = headerContent ?? headerTitle;
         }
     }
 }

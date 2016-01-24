@@ -6,8 +6,18 @@
     xmlns:cm="using:Caliburn.Micro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
     >
+
+    <Page.Resources>
+        <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
+    </Page.Resources>
+    
+    <common:TopHeader.Content>
+        <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.SearchBarVM}"
+                        HorizontalContentAlignment="Stretch" />
+    </common:TopHeader.Content>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding Datas}">

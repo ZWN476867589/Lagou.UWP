@@ -28,6 +28,10 @@ namespace Lagou.UWP.ViewModels {
 
         public BindableCollection<SearchedItemViewModel> Datas { get; set; }
 
+
+        public SearchBarViewModel SearchBarVM { get; set; }
+
+
         private int Page = 1;
 
         private INavigationService NS = null;
@@ -37,8 +41,10 @@ namespace Lagou.UWP.ViewModels {
         public ICommand ReloadCmd { get; set; }
 
 
-        public IndexViewModel(INavigationService ns) {
+        public IndexViewModel(SimpleContainer container, INavigationService ns) {
             this.NS = ns;
+
+            this.SearchBarVM = container.GetInstance<SearchBarViewModel>();
 
             this.ReloadCmd = new Command(async () => {
                 await this.LoadData(true);

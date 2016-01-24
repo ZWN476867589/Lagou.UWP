@@ -23,5 +23,9 @@ namespace Lagou.UWP.Views {
         public ShellView() {
             this.InitializeComponent();
         }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var a = e.AddedItems[0];
+        }
     }
 }
