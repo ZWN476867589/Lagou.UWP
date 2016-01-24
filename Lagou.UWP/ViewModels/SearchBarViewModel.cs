@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.ViewManagement;
 
 namespace Lagou.UWP.ViewModels {
 
@@ -53,6 +54,7 @@ namespace Lagou.UWP.ViewModels {
                     City = this.City
                 });
             }
+            InputPane.GetForCurrentView().TryHide();
         }
     }
 

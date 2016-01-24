@@ -9,23 +9,47 @@ using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.ComponentModel;
 
 namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
-    public class RootFrameViewModel : ViewAware {
+    public class RootFrameViewModel : DependencyObject, INotifyPropertyChangedEx {
 
-        private object _header = null;
-        public object Header {
+        public static readonly DependencyProperty HeaderTemplateProperty =
+            DependencyProperty.Register(
+                "HeaderTemplate",
+                typeof(DataTemplate),
+                typeof(RootFrameViewModel),
+                new PropertyMetadata(null));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public DataTemplate HeaderTemplate {
             get {
-                return this._header;
+                return this.GetValue(HeaderTemplateProperty) as DataTemplate;
             }
             set {
-                this._header = value;
-                this.NotifyOfPropertyChange(() => this.Header);
+                this.SetValue(HeaderTemplateProperty, value);
+                this.NotifyOfPropertyChange("HeaderTemplate");
             }
         }
 
+        //private DataTemplate _headerTemplate = null;
+        //public DataTemplate HeaderTemplate {
+        //    get {
+        //        return this._headerTemplate;
+        //    }
+        //    set {
+        //        this._headerTemplate = value;
+        //        this.NotifyOfPropertyChange(() => this.HeaderTemplate);
+        //    }
+        //}
+
         public Thickness Margin { get; set; }
+
+        public bool IsNotifying {
+            get; set;
+        }
 
         public RootFrameViewModel() {
             DisplayInformation.GetForCurrentView().OrientationChanged += RootFrameViewModel_OrientationChanged;
@@ -57,7 +81,16 @@ namespace Lagou.UWP.ViewModels {
                     break;
             }
 
-            this.NotifyOfPropertyChange(() => this.Margin);
+            this.NotifyOfPropertyChange("Margin");
+        }
+
+        public void NotifyOfPropertyChange(string propertyName) {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void Refresh() {
+
         }
     }
 }

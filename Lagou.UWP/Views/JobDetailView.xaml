@@ -7,20 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
-    common:TopHeader.Title="职位详情"
     >
 
-    <!--common:TopHeader.Title="{Binding Source={StaticResource Proxy}, Path=Data.Title}"-->
-
-    <!--<Page.Resources>
+    <Page.Resources>
         <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
-    </Page.Resources>-->
+    </Page.Resources>
 
-    <!--<common:TopHeader.Title>
-        <x:String>
-            {Binding Source={StaticResource Proxy}, Path=Data.Title}
-        </x:String>
-    </common:TopHeader.Title>-->
+    <common:TopHeader.ContentTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding Source={StaticResource Proxy}, Path=Data.Title}" Margin="10" Foreground="White" />
+        </DataTemplate>
+    </common:TopHeader.ContentTemplate>
 
     <Page.BottomAppBar>
         <CommandBar Background="#cc999999">
@@ -147,5 +144,10 @@
             <!--//评论-->
         </FlipView>
 
+        <ProgressRing Style="{StaticResource pageBusy}"
+                      Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                      IsActive="{Binding IsBusy}"
+                      Grid.RowSpan="4"
+                      />
     </Grid>
 </Page>

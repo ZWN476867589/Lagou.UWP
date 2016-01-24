@@ -14,11 +14,15 @@
         <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Page.Resources>
     
-    <common:TopHeader.Content>
-        <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.SearchBarVM}"
+    <common:TopHeader.ContentTemplate>
+        <DataTemplate>
+            <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.SearchBarVM}"
                         HorizontalContentAlignment="Stretch" />
-    </common:TopHeader.Content>
+        </DataTemplate>
+    </common:TopHeader.ContentTemplate>
 
+    
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding Datas}">
             <ListView.ItemContainerStyle>
@@ -57,13 +61,9 @@
             </ListView.FooterTemplate>
         </ListView>
 
-        <ProgressRing Width="50" Height="50" 
+        <ProgressRing Style="{StaticResource pageBusy}"
                       Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
                       IsActive="{Binding IsBusy}"
-                      VerticalAlignment="Stretch"
-                      HorizontalAlignment="Stretch"
-                      VerticalContentAlignment="Center"
-                      HorizontalContentAlignment="Center"
                       />
     </Grid>
 

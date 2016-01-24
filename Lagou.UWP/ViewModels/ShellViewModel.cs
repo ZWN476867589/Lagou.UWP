@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace Lagou.UWP.ViewModels {
 
@@ -57,10 +58,15 @@ namespace Lagou.UWP.ViewModels {
         public void ChangeHeader(Pivot pivot) {
             var model = pivot.SelectedItem;
             var view = (FrameworkElement)ViewLocator.LocateForModel(model, null, null);
-            var headerContent = TopHeader.GetContent(view);
-            var headerTitle = TopHeader.GetTitle(view);
+            var headerTemplate = TopHeader.GetContentTemplate(view);
+            this._rootFrameVM.HeaderTemplate = headerTemplate;
 
-            this._rootFrameVM.Header = (object)headerContent ?? headerTitle;
+            //var binding = new Binding() {
+            //    Source = view,
+            //    Path = new PropertyPath("TopHeader.ContentTemplate")
+            //};
+
+            //BindingOperations.SetBinding(this._rootFrameVM, RootFrameViewModel.HeaderTemplateProperty, binding);
         }
     }
 }

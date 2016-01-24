@@ -79,29 +79,9 @@ namespace Lagou.UWP {
 
         private void Frm_Navigated(object sender, NavigationEventArgs e) {
             var ele = (Page)e.Content;
-            var header = TopHeader.GetContent(ele);
-            var title = TopHeader.GetTitle(ele);
-            if (header != null) {
-                this._rootFrameVM.Header = header;
-                //var binding = new Binding() {
-                //    Source = ele,
-                //    Path = new PropertyPath("DataContext"),
-                //};
-                //header.SetBinding(FrameworkElement.DataContextProperty, binding);
-            } else {
-                //var exp = ele.GetBindingExpression(TopHeader.TitleProperty);
-                //if (exp != null) {
-                //    ele.RegisterPropertyChangedCallback(TopHeader.TitleProperty, TitleChanged);
-                //} else
-                this._rootFrameVM.Header = title;
-            }
+            var template = TopHeader.GetContentTemplate(ele);
+            this._rootFrameVM.HeaderTemplate = template;
         }
-
-        private void TitleChanged(DependencyObject sender, DependencyProperty dp) {
-            var title = sender.GetValue(TopHeader.TitleProperty);
-            this._rootFrameVM.Header = title;
-        }
-
 
         /// <summary>
         /// fire before configure

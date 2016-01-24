@@ -17,19 +17,11 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ContentControl Content="{Binding Header}" HorizontalContentAlignment="Stretch">
-            <ContentControl.ContentTemplateSelector>
-                <common:HeaderTemplateSelector>
-                    <common:HeaderTemplateSelector.TitleTemplate>
-                        <DataTemplate>
-                            <Grid Background="{StaticResource HeaderBrush}" Padding="5,10">
-                                <TextBlock Text="{Binding}" Foreground="White" />
-                            </Grid>
-                        </DataTemplate>
-                    </common:HeaderTemplateSelector.TitleTemplate>
-                </common:HeaderTemplateSelector>
-            </ContentControl.ContentTemplateSelector>
-        </ContentControl>
+        <Grid Background="{StaticResource HeaderBrush}">
+            <ContentControl HorizontalContentAlignment="Stretch" 
+                        ContentTemplate="{Binding HeaderTemplate}"
+                        />
+        </Grid>
 
 
         <Frame x:Name="frm" Grid.Row="1" />

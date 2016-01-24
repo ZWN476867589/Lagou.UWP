@@ -9,12 +9,19 @@
     xmlns:common="using:Lagou.UWP.Common"
     x:Name="root"
     mc:Ignorable="d">
-    
+
+    <!--ItemsSource="{Binding ElementName=pivot,Path=SelectedItem,Converter={}}"-->
+    <!--<common:TopHeader.ContentTemplateBinding>
+        <Binding Source="" Path="" ElementName="pivot" />
+    </common:TopHeader.ContentTemplateBinding>-->
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Grid.Row="1" ItemsSource="{Binding Datas}" 
+        <Pivot Grid.Row="1"
+               ItemsSource="{Binding Datas}" 
                Style="{StaticResource BottomHeaderPivot}"
                SelectionChanged="Pivot_SelectionChanged"
                cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"
+               x:Name="pivot"
                >
             <!--$view shellView-->
             <!--source pivot-->
