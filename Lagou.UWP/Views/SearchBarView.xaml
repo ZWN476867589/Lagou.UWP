@@ -51,7 +51,10 @@
                 <AutoSuggestBox Grid.Column="1"                        
                             QueryIcon="Find"
                             Style="{StaticResource NoBorderAutoSuggestBox}"
-                                VerticalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            PlaceholderText="公司/职位/关键字"
+                            Text="{Binding Keyword,Mode=TwoWay}"
+                            cm:Message.Attach="[Event QuerySubmitted] = [Action Submit]"
                             />
             </Grid>
         </Border>

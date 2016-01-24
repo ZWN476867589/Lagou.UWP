@@ -31,20 +31,21 @@ namespace Lagou.UWP.ViewModels {
 
         public SearchBarViewModel SearchBarVM { get; set; }
 
-
-        private int Page = 1;
-
         private INavigationService NS = null;
 
         public ICommand LoadMoreCmd { get; set; }
 
         public ICommand ReloadCmd { get; set; }
 
+        private string _city = "";
+        private string _keyword = "";
+        private int _page = 1;
 
         public IndexViewModel(SimpleContainer container, INavigationService ns) {
             this.NS = ns;
 
             this.SearchBarVM = container.GetInstance<SearchBarViewModel>();
+            this.SearchBarVM.OnSubmit += SearchBarVM_OnSubmit;
 
             this.ReloadCmd = new Command(async () => {
                 await this.LoadData(true);
@@ -55,6 +56,12 @@ namespace Lagou.UWP.ViewModels {
             });
         }
 
+        private async void SearchBarVM_OnSubmit(object sender, SearchBarEventArgs e) {
+            this._city = e.City;
+            this._keyword = e.Keyword;
+
+            await this.LoadData(true);
+        }
 
         protected override void OnActivate() {
             base.OnActivate();
@@ -71,7 +78,9 @@ namespace Lagou.UWP.ViewModels {
             this.IsBusy = true;
 
             var method = new Search() {
-                Page = reload ? 1 : this.Page
+                Page = reload ? 1 : this._page,
+                Key = this._keyword,
+                City = this._city
             };
             var datas = await ApiClient.Execute(method);
             if (!method.HasError && datas.Count() > 0) {
@@ -85,7 +94,7 @@ namespace Lagou.UWP.ViewModels {
                     new SearchedItemViewModel(d, this.NS)
                 ));
 
-                this.Page++;
+                this._page++;
             }
 
             this.IsBusy = false;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Lagou.UWP.ViewModels {
@@ -25,7 +26,7 @@ namespace Lagou.UWP.ViewModels {
             this.Datas.CollectionChanged += Datas_CollectionChanged;
 
             this.Datas.Add(container.GetInstance<IndexViewModel>());
-            this.Datas.Add(container.GetInstance<SearchViewModel>());
+            this.Datas.Add(container.GetInstance<DiscoverViewModel>());
             this.Datas.Add(container.GetInstance<MyViewModel>());
             this.Datas.Add(container.GetInstance<LocalFavoriteViewModel>());
 
@@ -55,11 +56,11 @@ namespace Lagou.UWP.ViewModels {
 
         public void ChangeHeader(Pivot pivot) {
             var model = pivot.SelectedItem;
-            var view = ViewLocator.LocateForModel(model, null, null);
-            var headerContent = view.GetValue(TopHeader.ContentProperty);
-            var headerTitle = view.GetValue(TopHeader.TitleProperty);
+            var view = (FrameworkElement)ViewLocator.LocateForModel(model, null, null);
+            var headerContent = TopHeader.GetContent(view);
+            var headerTitle = TopHeader.GetTitle(view);
 
-            this._rootFrameVM.Header = headerContent ?? headerTitle;
+            this._rootFrameVM.Header = (object)headerContent ?? headerTitle;
         }
     }
 }

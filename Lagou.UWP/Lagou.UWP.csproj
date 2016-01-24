@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\BasePageVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\CitySelectorViewModel.cs" />
+    <Compile Include="ViewModels\DiscoverViewModel.cs" />
     <Compile Include="ViewModels\EvaluationViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
     <Compile Include="ViewModels\RootFrameViewModel.cs" />

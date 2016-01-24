@@ -16,6 +16,8 @@ namespace Lagou.UWP.ViewModels {
 
         public string City { get; set; } = "全国";
 
+        public string Keyword { get; set; }
+
         private bool needCloseCitySelector = false;
         public bool NeedCloseCitySelector {
             get {
@@ -25,6 +27,8 @@ namespace Lagou.UWP.ViewModels {
                 this.needCloseCitySelector = value;
             }
         }
+
+        public event EventHandler<SearchBarEventArgs> OnSubmit;
 
         public SearchBarViewModel(SimpleContainer container) {
             this.CitySelectorVM = container.GetInstance<CitySelectorViewModel>();
@@ -41,5 +45,19 @@ namespace Lagou.UWP.ViewModels {
             this.City = e.City;
             this.NotifyOfPropertyChange(() => this.City);
         }
+
+        public void Submit() {
+            if (this.OnSubmit != null) {
+                this.OnSubmit.Invoke(this, new SearchBarEventArgs() {
+                    Keyword = this.Keyword,
+                    City = this.City
+                });
+            }
+        }
+    }
+
+    public class SearchBarEventArgs : EventArgs {
+        public string Keyword { get; set; }
+        public string City { get; set; }
     }
 }
