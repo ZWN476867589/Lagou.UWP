@@ -30,6 +30,11 @@ namespace Lagou.API.Attributes {
         }
 
         public override object Parse(IParentNode node, Type valueType) {
+            var ti = valueType.GetTypeInfo();
+            if (!ti.IsPrimitive && !valueType.Equals(typeof(string))) {
+                throw new NotSupportedException("HtmlValueQueryAttribute 只支持基元类型");
+            }
+
             var ele = node.QuerySelector(this.Selector);
             if (ele != null) {
                 string value = "";
@@ -47,7 +52,10 @@ namespace Lagou.API.Attributes {
                         break;
                 }
 
-                return value;
+                if (valueType.Equals(typeof(string)))
+                    return value;
+                else
+                    return Convert.ChangeType(value, valueType);
             }
 
             return null;

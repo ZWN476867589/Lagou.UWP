@@ -21,7 +21,7 @@ namespace Lagou.API.Attributes {
         public override object Parse(IParentNode node, Type valueType) {
             var ti = valueType.GetTypeInfo();
             if (!typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(ti)) {
-                throw new ArgumentException("HtmlCollectionQueryAttribute 只支持集合类型");
+                throw new NotSupportedException("HtmlCollectionQueryAttribute 只支持集合类型");
             }
             var type = ti.GenericTypeArguments[0];
 
@@ -29,19 +29,28 @@ namespace Lagou.API.Attributes {
                 // value parser
             } else {
                 //object parser
-                this.ParseSub(type, node);
+                return this.ParseSub(type, node);
             }
             return null;
         }
 
-        private void ParseSub(Type t, IParentNode node) {
+        private IEnumerable<object> ParseSub(Type t, IParentNode node) {
+            var values = new List<object>();
+
             var eles = node.QuerySelectorAll(this.Selector);
             var ps = t.GetRuntimeProperties();
             foreach (var ele in eles) {
+                var obj = Activator.CreateInstance(t);
+
                 foreach (var p in ps) {
-                    var v = p.Parse(ele);
+                    var value = p.Parse(ele);
+                    p.SetValue(obj, value);
                 }
+
+                values.Add(obj);
             }
+
+            return values;
         }
     }
 }

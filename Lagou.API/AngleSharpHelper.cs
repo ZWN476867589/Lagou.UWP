@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Lagou.API.Attributes;
 using AngleSharp.Dom;
+using System.Collections;
 
 namespace Lagou.API {
     public static class AngleSharpHelper {
@@ -14,19 +15,11 @@ namespace Lagou.API {
         public static T Parse<T>(this HtmlParser parser, string source) where T : class, new() {
 
             using (var doc = parser.Parse(source)) {
-
                 var t = new T();
                 var ps = typeof(T).GetRuntimeProperties();
                 foreach (var p in ps) {
                     var value = p.Parse(doc);
-                    try {
-                        if (!p.PropertyType.Equals(typeof(string))) {
-                            var v = Convert.ChangeType(value, p.PropertyType);
-                            p.SetValue(t, v);
-                        } else {
-                            p.SetValue(t, value);
-                        }
-                    } catch { }
+                    p.SetValue(t, value);
                 }
                 return t;
             }
