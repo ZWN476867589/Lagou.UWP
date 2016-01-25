@@ -118,11 +118,11 @@ namespace Lagou.UWP.ViewModels {
         }
 
         private void SeeAll() {
-            //this.NS.For<CompanyPositionsViewModel>()
-            //    .WithParam(p => p.CompanyID, this.Data?.CompanyID)
-            //    .WithParam(p => p.CompanyName, this.Data?.CompanyName)
-            //    .WithParam(p => p.CompanyLogo, this.Data?.CompanyLogo)
-            //    .Navigate();
+            this.NS.For<CompanyPositionsViewModel>()
+                .WithParam(p => p.CompanyID, this.Data?.CompanyID)
+                .WithParam(p => p.CompanyName, this.Data?.CompanyName)
+                .WithParam(p => p.CompanyLogo, this.Data?.CompanyLogo)
+                .Navigate();
         }
 
         private void AddFavorite() {

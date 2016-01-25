@@ -15,14 +15,12 @@ namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
     public class ShellViewModel : Screen {
 
-        private readonly IEventAggregator _eventAggregator;
+        //private readonly IEventAggregator _eventAggregator;
 
         public BindableCollection<BaseVM> Datas { get; set; } = new BindableCollection<BaseVM>();
 
-        private RootFrameViewModel _rootFrameVM = null;
-
         public ShellViewModel(SimpleContainer container, IEventAggregator eventAggregator) {
-            this._eventAggregator = eventAggregator;
+            //this._eventAggregator = eventAggregator;
 
             this.Datas.CollectionChanged += Datas_CollectionChanged;
 
@@ -30,8 +28,6 @@ namespace Lagou.UWP.ViewModels {
             this.Datas.Add(container.GetInstance<DiscoverViewModel>());
             this.Datas.Add(container.GetInstance<MyViewModel>());
             this.Datas.Add(container.GetInstance<LocalFavoriteViewModel>());
-
-            this._rootFrameVM = container.GetInstance<RootFrameViewModel>();
         }
 
         private void Datas_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
@@ -51,22 +47,14 @@ namespace Lagou.UWP.ViewModels {
         }
 
         protected override void OnActivate() {
-            _eventAggregator.Subscribe(this);
+            //_eventAggregator.Subscribe(this);
             base.OnActivate();
         }
 
-        public void ChangeHeader(Pivot pivot) {
-            var model = pivot.SelectedItem;
-            var view = (FrameworkElement)ViewLocator.LocateForModel(model, null, null);
-            var headerTemplate = TopHeader.GetContentTemplate(view);
-            this._rootFrameVM.HeaderTemplate = headerTemplate;
-
-            //var binding = new Binding() {
-            //    Source = view,
-            //    Path = new PropertyPath("TopHeader.ContentTemplate")
-            //};
-
-            //BindingOperations.SetBinding(this._rootFrameVM, RootFrameViewModel.HeaderTemplateProperty, binding);
+        public void ChangeHeader(Pivot p) {
+            var model = p.SelectedItem;
+            var view = ViewLocator.LocateForModel(model, null, null);
+            TopHeader.LastHeaderFrom = view;
         }
     }
 }

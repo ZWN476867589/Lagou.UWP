@@ -65,7 +65,7 @@ namespace Lagou.UWP {
             var view = new RootFrameView();
             Window.Current.Content = view;
 
-            var model = ViewModelLocator.LocateForView(view);
+            var model = RootFrameViewModel.Instance.Value;// ViewModelLocator.LocateForView(view);
             ViewModelBinder.Bind(model, view, null);
             this._rootFrameVM = (RootFrameViewModel)model;
 
@@ -78,9 +78,10 @@ namespace Lagou.UWP {
         }
 
         private void Frm_Navigated(object sender, NavigationEventArgs e) {
-            var ele = (Page)e.Content;
-            var template = TopHeader.GetContentTemplate(ele);
-            this._rootFrameVM.HeaderTemplate = template;
+            //var ele = (Page)e.Content;
+            ////var template = TopHeader.GetContentTemplate(ele);
+            //var content = TopHeader.GetContent(ele);
+            //this._rootFrameVM.Header = content;
         }
 
         /// <summary>

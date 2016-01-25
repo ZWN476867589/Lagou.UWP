@@ -7,22 +7,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
-    x:Name="root"
-    mc:Ignorable="d">
-
-    <!--ItemsSource="{Binding ElementName=pivot,Path=SelectedItem,Converter={}}"-->
-    <!--<common:TopHeader.ContentTemplateBinding>
-        <Binding Source="" Path="" ElementName="pivot" />
-    </common:TopHeader.ContentTemplateBinding>-->
+    xmlns:vm="using:Lagou.UWP.ViewModels"
+    mc:Ignorable="d"
+    >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot Grid.Row="1"
                ItemsSource="{Binding Datas}" 
                Style="{StaticResource BottomHeaderPivot}"
-               SelectionChanged="Pivot_SelectionChanged"
                cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"
-               x:Name="pivot"
                >
+            <!--cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"-->
             <!--$view shellView-->
             <!--source pivot-->
             <!--$executionContext ActionExecutionContext-->

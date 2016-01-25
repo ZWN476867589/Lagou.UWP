@@ -61,16 +61,8 @@
         <Setter Property="Foreground" Value="White" />
     </Style>
 
-    <!--<ProgressRing Width="50" Height="50" 
-                      Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
-                      IsActive="{Binding IsBusy}"
-                      VerticalAlignment="Stretch"
-                      HorizontalAlignment="Stretch"
-                      VerticalContentAlignment="Center"
-                      HorizontalContentAlignment="Center"
-                      Grid.RowSpan="4"
-                      />-->
 
+    <!--忙指示-->
     <Style x:Key="pageBusy" TargetType="ProgressRing">
         <Setter Property="Width" Value="50" />
         <Setter Property="Width" Value="50" />

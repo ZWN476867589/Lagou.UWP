@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\BasePageVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\CitySelectorViewModel.cs" />
+    <Compile Include="ViewModels\CompanyPositionsViewModel.cs" />
     <Compile Include="ViewModels\DiscoverViewModel.cs" />
     <Compile Include="ViewModels\EvaluationViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
@@ -137,11 +138,23 @@
     <Compile Include="Views\CitySelectorView.xaml.cs">
       <DependentUpon>CitySelectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CompanyPositionsView.xaml.cs">
+      <DependentUpon>CompanyPositionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiscoverView.xaml.cs">
+      <DependentUpon>DiscoverView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\IndexView.xaml.cs">
       <DependentUpon>IndexView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobDetailView.xaml.cs">
       <DependentUpon>JobDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocalFavoriteView.xaml.cs">
+      <DependentUpon>LocalFavoriteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyView.xaml.cs">
+      <DependentUpon>MyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RootFrameView.xaml.cs">
       <DependentUpon>RootFrameView.xaml</DependentUpon>
@@ -193,6 +206,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Styles\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Styles\Pivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,11 +225,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CompanyPositionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DiscoverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\IndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JobDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocalFavoriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

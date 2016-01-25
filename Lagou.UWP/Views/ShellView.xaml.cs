@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -22,10 +23,6 @@ namespace Lagou.UWP.Views {
     public sealed partial class ShellView : Page {
         public ShellView() {
             this.InitializeComponent();
-        }
-
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var a = e.AddedItems[0];
         }
     }
 }

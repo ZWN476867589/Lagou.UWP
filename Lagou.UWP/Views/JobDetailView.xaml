@@ -13,16 +13,16 @@
         <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Page.Resources>
 
-    <common:TopHeader.ContentTemplate>
-        <DataTemplate>
+    <common:TopHeader.Content>
+        <ContentControl>
             <TextBlock Text="{Binding Source={StaticResource Proxy}, Path=Data.Title}" Margin="10" Foreground="White" />
-        </DataTemplate>
-    </common:TopHeader.ContentTemplate>
+        </ContentControl>
+    </common:TopHeader.Content>
 
     <Page.BottomAppBar>
         <CommandBar Background="#cc999999">
             <AppBarButton Icon="Favorite" Label="收藏到本地" />
-            <AppBarButton Icon="List" Label="所有职位" />
+            <AppBarButton Icon="List" Label="所有职位" Command="{Binding SeeAllCmd}" />
         </CommandBar>
     </Page.BottomAppBar>
 

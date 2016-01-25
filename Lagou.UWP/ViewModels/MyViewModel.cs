@@ -20,5 +20,9 @@ namespace Lagou.UWP.ViewModels {
                 return "我的信息";
             }
         }
+
+        protected override void OnActivate() {
+            base.OnActivate();
+        }
     }
 }

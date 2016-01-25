@@ -11,7 +11,7 @@
     d:DesignWidth="400"
     cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"
     >
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -24,16 +24,16 @@
             <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="#cccccccc" BorderThickness="1" CornerRadius="30" 
+        <Ellipse Width="60" Height="60" 
+                Stroke="#cccccccc" StrokeThickness="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Grid.RowSpan="3">
-            <Ellipse Width="60" Height="60">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Data.CompanyLogoUri}" />
-                </Ellipse.Fill>
-            </Ellipse>
-        </Border>
+                Grid.RowSpan="3"
+                     >
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Data.CompanyLogoUri}" />
+            </Ellipse.Fill>
+        </Ellipse>
 
         <TextBlock Text="{Binding Data.CompanyName}" Grid.Column="1" Style="{StaticResource l_h1}" />
         <TextBlock Text="{Binding Data.PositionName}" Grid.Column="1" Grid.Row="1" Style="{StaticResource l_h2}" />

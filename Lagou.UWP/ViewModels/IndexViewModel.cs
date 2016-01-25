@@ -67,7 +67,6 @@ namespace Lagou.UWP.ViewModels {
             base.OnActivate();
 
             if (this.Datas == null) {
-                this.Datas = new BindableCollection<SearchedItemViewModel>();
                 Task.Delay(500).ContinueWith(async t => {
                     await this.LoadData();
                 });
@@ -75,6 +74,11 @@ namespace Lagou.UWP.ViewModels {
         }
 
         private async Task LoadData(bool reload = false) {
+            if (this.Datas == null) {
+                this.Datas = new BindableCollection<SearchedItemViewModel>();
+                this.NotifyOfPropertyChange(() => this.Datas);
+            }
+
             this.IsBusy = true;
 
             var method = new Search() {
