@@ -39,10 +39,14 @@
     <Compile Include="ApiClient.cs" />
     <Compile Include="Attributes\EnumParam.cs" />
     <Compile Include="Attributes\ErrorTagAttribute.cs" />
-    <Compile Include="Attributes\HtmlQueryAttribute.cs" />
+    <Compile Include="Attributes\HtmlCollecionQueryAttribute.cs" />
+    <Compile Include="Attributes\HtmlObjectParserAttribute.cs" />
+    <Compile Include="Attributes\HtmlParserAttribute.cs" />
+    <Compile Include="Attributes\HtmlValueQueryAttribute.cs" />
     <Compile Include="Attributes\ParamAttribute.cs" />
     <Compile Include="Attributes\SpecifyNameValueAttribute.cs" />
     <Compile Include="Converters\UnixTimestampDateTimeConverter.cs" />
+    <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Evaluation1.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\PositionTypes.cs" />
@@ -50,6 +54,7 @@
     <Compile Include="ErrorTypes.cs" />
     <Compile Include="MD5.cs" />
     <Compile Include="MethodBase.cs" />
+    <Compile Include="Methods\CompanyDetail.cs" />
     <Compile Include="Methods\EvaluationList.cs" />
     <Compile Include="Methods\GetCaptcha.cs" />
     <Compile Include="Methods\Login.cs" />
