@@ -36,6 +36,12 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <Style x:Key="l_small" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Foreground" Value="#999999" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>    
+    
     <!-- Font Icon -->
     <Style x:Key="fi_small" TargetType="FontIcon">
         <!--Not work-->
@@ -76,6 +82,15 @@
 
     <Style x:Key="Header" TargetType="ContentControl">
         <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style TargetType="CommandBar">
+        <Setter Property="Background" Value="{StaticResource PivotHeaderBackgroundBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style TargetType="AppBarButton">
         <Setter Property="Foreground" Value="White" />
     </Style>
 

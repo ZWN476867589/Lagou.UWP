@@ -109,6 +109,7 @@
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\EventTypesToFontAwesomeConverter.cs" />
     <Compile Include="Common\FlyoutBehavior.cs" />
     <Compile Include="Common\HeaderTemplateSelector.cs" />
     <Compile Include="Common\TopHeader.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="ViewModels\EvaluationViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RootFrameViewModel.cs" />
     <Compile Include="ViewModels\SearchBarViewModel.cs" />
@@ -158,6 +160,9 @@
     </Compile>
     <Compile Include="Views\JobDetailView.xaml.cs">
       <DependentUpon>JobDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaderView.xaml.cs">
+      <DependentUpon>LeaderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LocalFavoriteView.xaml.cs">
       <DependentUpon>LocalFavoriteView.xaml</DependentUpon>
@@ -258,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JobDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

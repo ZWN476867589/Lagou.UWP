@@ -99,11 +99,19 @@ namespace Lagou.API.Entities {
         }
 
         public class _History {
-            [JsonProperty("eventdate")]
-            public string Date { get; set; }
+            //部份数据中,这个属性无值
+            //[JsonProperty("eventdate")]
+            //public string Date { get; set; }
+
+            public string Year { get; set; }
+            public string Month { get; set; }
+            public string Day { get; set; }
 
             [JsonProperty("eventname")]
             public string Event { get; set; }
+
+            [JsonProperty("type")]
+            public _EventTypes EventType { get; set; }
 
             [JsonProperty("eventurl")]
             public string Url { get; set; }
@@ -119,6 +127,27 @@ namespace Lagou.API.Entities {
                 }
             }
 
+        }
+
+        public enum _EventTypes {
+            /// <summary>
+            /// 数据
+            /// </summary>
+            Data = 1,
+            /// <summary>
+            /// 资本
+            /// </summary>
+            Capital = 2,
+            /// <summary>
+            /// 人员
+            /// </summary>
+            Member = 3,
+
+            /// <summary>
+            /// 产品
+            /// </summary>
+            Product = 4,
+            Other = 5
         }
 
         public class _Location {
@@ -158,7 +187,7 @@ namespace Lagou.API.Entities {
             [JsonProperty("producturl")]
             public string Url { get; set; }
 
-            [JsonProperty("productprofile"),JsonConverter(typeof(HtmlCleanConverter))]
+            [JsonProperty("productprofile"), JsonConverter(typeof(HtmlCleanConverter))]
             public string Desc { get; set; }
 
             [JsonProperty("product")]
@@ -167,9 +196,11 @@ namespace Lagou.API.Entities {
             [JsonProperty("productpicurl")]
             public string Img { get; set; }
 
-            public string FixedImg { get {
+            public string FixedImg {
+                get {
                     return this.Img.FixUrl("http://www.lagou.com");
-                } }
+                }
+            }
 
             [JsonProperty("producttype")]
             public string[] Type { get; set; }

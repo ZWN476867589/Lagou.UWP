@@ -41,6 +41,8 @@ namespace Lagou.UWP.ViewModels {
 
         public HistoryViewModel HistoryVM { get; set; }
 
+        public LeaderViewModel LeaderVM { get; set; }
+
         private SimpleContainer _container = null;
 
         public CompanyViewModel(SimpleContainer container) {
@@ -71,9 +73,11 @@ namespace Lagou.UWP.ViewModels {
             this.Data = await ApiClient.Execute(mth);
             this.ProductsVM = new ProductsViewModel(this.Data?.Products);
             this.HistoryVM = new HistoryViewModel(this.Data?.History);
+            this.LeaderVM = new LeaderViewModel(this.Data?.Leaders);
             this.NotifyOfPropertyChange(() => this.Data);
             this.NotifyOfPropertyChange(() => this.ProductsVM);
             this.NotifyOfPropertyChange(() => this.HistoryVM);
+            this.NotifyOfPropertyChange(() => this.LeaderVM);
 
             this.IsBusy = false;
         }

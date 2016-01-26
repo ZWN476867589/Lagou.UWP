@@ -9,38 +9,43 @@
     xmlns:cm="using:Caliburn.Micro"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
+    </Page.Resources>
+
     <common:TopHeader.Content>
-        <TextBlock Text="公司详情" Padding="10" />
+        <Grid common:UniMargin.Margin="4" Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Stroke="#cccccc" StrokeThickness="1" RadiusX="10" RadiusY="10"
+                 Width="60" Height="60" Grid.RowSpan="3" Grid.Column="0">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding Source={StaticResource Proxy},Path=Data.CompanyLogo}" />
+                </Rectangle.Fill>
+            </Rectangle>
+            
+            <TextBlock Text="{Binding Source={StaticResource Proxy}, Path=Data.CompanyName}" Grid.Column="1" 
+                       Style="{StaticResource l_h2}" Foreground="White" />
+            <TextBlock Text="{Binding Source={StaticResource Proxy}, Path=Data.Data.CoreInfo.CompanyName}" 
+                       Grid.Column="1" Grid.Row="1" 
+                       Style="{StaticResource l_h3}" Foreground="White" />
+
+        </Grid>
     </common:TopHeader.Content>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          common:UniMargin.Margin="2"
           >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <Ellipse Stroke="#cccccc" StrokeThickness="1" 
-                 Width="60" Height="60" Grid.RowSpan="3" Grid.Column="0">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding CompanyLogo}" />
-            </Ellipse.Fill>
-        </Ellipse>
-
-        <TextBlock Text="{Binding CompanyName}" Grid.Column="1" Style="{StaticResource l_h1}" />
-        <TextBlock Text="{Binding Data.CoreInfo.CompanyName}" Grid.Column="1" Grid.Row="1" Style="{StaticResource l_h2}" />
-        <!--<TextBlock Text="{Binding Data.ShortDesc}" Grid.Column="1" Grid.Row="2" Style="{StaticResource l_text}" />-->
-        <!--<GridView Grid.Column="1" Grid.Row="2">
-        </GridView>-->
-
-        <Pivot Grid.Row="3" Grid.ColumnSpan="2">
+        <Pivot Grid.Row="3" Grid.ColumnSpan="2"
+               Style="{StaticResource BottomHeaderPivot}"
+               >
             <PivotItem Header="介绍">
                 <ScrollViewer>
                     <TextBlock Text="{Binding Data.Introduction.Desc}" 
@@ -51,26 +56,25 @@
             <PivotItem Header="产品" FontSize="12">
                 <ContentControl cm:View.Model="{Binding ProductsVM}" />
             </PivotItem>
+            
             <PivotItem Header="团队">
-
+                <ContentControl cm:View.Model="{Binding LeaderVM}" />
             </PivotItem>
 
             <PivotItem Header="事件">
                 <ContentControl cm:View.Model="{Binding HistoryVM}" />
             </PivotItem>
 
-            <Pivot.ItemTemplate>
+            <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" FontSize="12" />
                 </DataTemplate>
-            </Pivot.ItemTemplate>
+            </Pivot.HeaderTemplate>
         </Pivot>
 
         <ProgressRing Style="{StaticResource pageBusy}"
                       Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
                       IsActive="{Binding IsBusy}"
-                      Grid.RowSpan="4"
-                      Grid.ColumnSpan="2"
                       />
     </Grid>
 </Page>
