@@ -61,7 +61,7 @@ namespace Lagou.Api.Test {
         [TestMethod]
         public void CompanyTest() {
             var mth = new CompanyDetail() {
-                CompanyID = 111387
+                CompanyID = 6368
             };
 
             var c = ApiClient.Execute(mth).Result;

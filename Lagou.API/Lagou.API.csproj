@@ -37,12 +37,15 @@
   <ItemGroup>
     <Compile Include="AngleSharpHelper.cs" />
     <Compile Include="ApiClient.cs" />
+    <Compile Include="Attributes\ClearAttribute.cs" />
     <Compile Include="Attributes\EnumParam.cs" />
     <Compile Include="Attributes\ErrorTagAttribute.cs" />
-    <Compile Include="Attributes\HtmlCollecionQueryAttribute.cs" />
+    <Compile Include="Attributes\HtmlClearAttribute.cs" />
+    <Compile Include="Attributes\HtmlObjectCollecionParserAttribute.cs" />
     <Compile Include="Attributes\HtmlObjectParserAttribute.cs" />
     <Compile Include="Attributes\HtmlParserAttribute.cs" />
-    <Compile Include="Attributes\HtmlValueQueryAttribute.cs" />
+    <Compile Include="Attributes\HtmlValueCollectionParserAttribute.cs" />
+    <Compile Include="Attributes\HtmlValueParserAttribute.cs" />
     <Compile Include="Attributes\ParamAttribute.cs" />
     <Compile Include="Attributes\SpecifyNameValueAttribute.cs" />
     <Compile Include="Converters\UnixTimestampDateTimeConverter.cs" />

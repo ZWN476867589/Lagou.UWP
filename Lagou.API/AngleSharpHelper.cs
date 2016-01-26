@@ -8,6 +8,7 @@ using System.Reflection;
 using Lagou.API.Attributes;
 using AngleSharp.Dom;
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace Lagou.API {
     public static class AngleSharpHelper {
@@ -29,6 +30,14 @@ namespace Lagou.API {
             var attr = p.GetCustomAttribute<HtmlParserAttribute>();
             if (attr != null) {
                 var value = attr.Parse(node, p.PropertyType);
+
+                if (p.PropertyType.Equals(typeof(string))) {
+                    var clears = p.GetCustomAttributes<ClearAttribute>().OrderBy(c => c.Order);
+                    foreach (var c in clears) {
+                        value = c.Clear(value as string);
+                    }
+                }
+
                 return value;
             }
 

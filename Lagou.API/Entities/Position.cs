@@ -20,59 +20,59 @@ namespace Lagou.API.Entities {
         /// <summary>
         /// 职位名称
         /// </summary>
-        [HtmlValueQuery(".postitle .title")]
+        [HtmlValueParser(".postitle .title")]
         public string JobTitle { get; set; }
 
         /// <summary>
         /// 薪水
         /// </summary>
-        [HtmlValueQuery(".detail .items .salary")]
+        [HtmlValueParser(".detail .items .salary")]
         public string Salary { get; set; }
 
         /// <summary>
         /// 工作地点
         /// </summary>
-        [HtmlValueQuery(".detail .items .workaddress")]
+        [HtmlValueParser(".detail .items .workaddress")]
         public string WorkAddress { get; set; }
 
         /// <summary>
         /// 全职/兼职
         /// </summary>
-        [HtmlValueQuery(".detail .items .jobnature")]
+        [HtmlValueParser(".detail .items .jobnature")]
         public string JobNature { get; set; }
 
         /// <summary>
         /// 工作年限
         /// </summary>
-        [HtmlValueQuery(".detail .items .workyear")]
+        [HtmlValueParser(".detail .items .workyear")]
         public string WorkYear { get; set; }
 
         /// <summary>
         /// 学历
         /// </summary>
-        [HtmlValueQuery(".detail .items .education")]
+        [HtmlValueParser(".detail .items .education")]
         public string Education { get; set; }
 
         /// <summary>
         /// 职位诱惑
         /// </summary>
-        [HtmlValueQuery(".detail .temptation")]
+        [HtmlValueParser(".detail .temptation")]
         public string Temptation { get; set; }
 
-        [HtmlValueQuery(".company .logo", HtmlQueryValueTargets.Attribute, "src")]
+        [HtmlValueParser(".company .logo", HtmlQueryValueTargets.Attribute, "src")]
         public string CompanyLogo { get; set; }
 
-        [HtmlValueQuery(".company .desc .title")]
+        [HtmlValueParser(".company .desc .title")]
         public string CompanyName { get; set; }
 
-        [HtmlValueQuery(".company .desc .info")]
+        [HtmlValueParser(".company .desc .info")]
         public string CompanyDesc { get; set; }
 
 
         /// <summary>
         /// 职位描述
         /// </summary>
-        [HtmlValueQuery(".positiondesc .content")]
+        [HtmlValueParser(".positiondesc .content")]
         public string JobDesc { get; set; }
     }
 }
