@@ -420,7 +420,10 @@
                                             </ContentControl.Clip>
                                             <!-- Pivot Header Background -->
                                             <Grid Background="{StaticResource PivotHeaderBackgroundBrush}">
-                                                <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed" HorizontalAlignment="Center" />
+                                                <PivotHeaderPanel x:Name="StaticHeader" 
+                                                                  Visibility="Collapsed" HorizontalAlignment="Center"
+                                                                  />
+                                                
                                                 <PivotHeaderPanel x:Name="Header">
                                                     <PivotHeaderPanel.RenderTransform>
                                                         <TransformGroup>

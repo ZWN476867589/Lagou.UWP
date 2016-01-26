@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="Lagou.UWP.Views.CompanyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lagou.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Lagou.UWP.Common"
+    xmlns:cm="using:Caliburn.Micro"
+    mc:Ignorable="d">
+
+    <common:TopHeader.Content>
+        <TextBlock Text="公司详情" Padding="10" />
+    </common:TopHeader.Content>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          common:UniMargin.Margin="2"
+          >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Ellipse Stroke="#cccccc" StrokeThickness="1" 
+                 Width="60" Height="60" Grid.RowSpan="3" Grid.Column="0">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding CompanyLogo}" />
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <TextBlock Text="{Binding CompanyName}" Grid.Column="1" Style="{StaticResource l_h1}" />
+        <TextBlock Text="{Binding Data.CoreInfo.CompanyName}" Grid.Column="1" Grid.Row="1" Style="{StaticResource l_h2}" />
+        <!--<TextBlock Text="{Binding Data.ShortDesc}" Grid.Column="1" Grid.Row="2" Style="{StaticResource l_text}" />-->
+        <!--<GridView Grid.Column="1" Grid.Row="2">
+        </GridView>-->
+
+        <Pivot Grid.Row="3" Grid.ColumnSpan="2">
+            <PivotItem Header="介绍">
+                <ScrollViewer>
+                    <TextBlock Text="{Binding Data.Introduction.Desc}" 
+                               TextWrapping="Wrap" 
+                               Style="{StaticResource l_text}" />
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="产品" FontSize="12">
+                <ContentControl cm:View.Model="{Binding ProductsVM}" />
+            </PivotItem>
+            <PivotItem Header="团队">
+
+            </PivotItem>
+
+            <PivotItem Header="事件">
+                <ContentControl cm:View.Model="{Binding HistoryVM}" />
+            </PivotItem>
+
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="12" />
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+
+        <ProgressRing Style="{StaticResource pageBusy}"
+                      Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                      IsActive="{Binding IsBusy}"
+                      Grid.RowSpan="4"
+                      Grid.ColumnSpan="2"
+                      />
+    </Grid>
+</Page>

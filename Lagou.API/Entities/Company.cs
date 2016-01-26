@@ -1,4 +1,5 @@
 ﻿using Lagou.API.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;

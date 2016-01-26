@@ -16,7 +16,7 @@
 
     <common:TopHeader.Content>
         <ContentControl cm:View.Model="{Binding Source={StaticResource Proxy}, Path=Data.SearchBarVM}"
-                        HorizontalContentAlignment="Stretch" />
+                        HorizontalContentAlignment="Stretch" Padding="0" />
         <!--<ContentControl>
             <TextBlock Text="{Binding Source={StaticResource Proxy}, Path=Data.IsBusy}" />
         </ContentControl>-->

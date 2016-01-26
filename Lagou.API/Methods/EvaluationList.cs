@@ -37,8 +37,10 @@ namespace Lagou.API.Methods {
                 };
                 o = JsonConvert.DeserializeAnonymousType(json, o);
                 return o.result;
+            } else {
+                this.ErrorType = ErrorTypes.MatchError;
+                return Enumerable.Empty<Evaluation>();
             }
-            return Enumerable.Empty<Evaluation>();
         }
     }
 }

@@ -18,8 +18,9 @@ namespace Lagou.API {
         }
 
         public bool HasError {
-            get;
-            set;
+            get {
+                return this.ErrorType != null;
+            }
         }
 
         public ErrorTypes? ErrorType {
@@ -56,8 +57,6 @@ namespace Lagou.API {
 
                 this.ErrorType = bex.HResult.ToString().ParseErrorType();
                 this.Message = bex.Message;
-                this.HasError = true;
-
                 return "";
             }
         }

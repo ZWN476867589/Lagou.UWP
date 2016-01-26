@@ -33,6 +33,7 @@
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>
+                       
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel>

@@ -74,4 +74,9 @@
         <Setter Property="IsActive" Value="{Binding IsBusy}" />
     </Style>
 
+    <Style x:Key="Header" TargetType="ContentControl">
+        <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
 </ResourceDictionary>

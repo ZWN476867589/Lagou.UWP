@@ -20,6 +20,7 @@
         <Grid Background="{StaticResource HeaderBrush}">
             <ContentControl HorizontalContentAlignment="Stretch" 
                         Content="{Binding Header}"
+                            Style="{StaticResource Header}"
                         />
         </Grid>
 

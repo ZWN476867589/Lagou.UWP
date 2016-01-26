@@ -56,6 +56,8 @@ namespace Lagou.UWP.ViewModels {
 
         public ICommand AddFavoriteCmd { get; set; }
 
+        public ICommand ShowCompanyCmd { get; set; }
+
         public override char Glyph {
             get {
                 return char.MinValue;
@@ -71,6 +73,10 @@ namespace Lagou.UWP.ViewModels {
 
             this.AddFavoriteCmd = new Command(() => {
                 this.AddFavorite();
+            });
+
+            this.ShowCompanyCmd = new Command(() => {
+                this.ShowCompany();
             });
 
             this.NS = ns;
@@ -119,6 +125,14 @@ namespace Lagou.UWP.ViewModels {
 
         private void SeeAll() {
             this.NS.For<CompanyPositionsViewModel>()
+                .WithParam(p => p.CompanyID, this.Data?.CompanyID)
+                .WithParam(p => p.CompanyName, this.Data?.CompanyName)
+                .WithParam(p => p.CompanyLogo, this.Data?.CompanyLogo)
+                .Navigate();
+        }
+
+        private void ShowCompany() {
+            this.NS.For<CompanyViewModel>()
                 .WithParam(p => p.CompanyID, this.Data?.CompanyID)
                 .WithParam(p => p.CompanyName, this.Data?.CompanyName)
                 .WithParam(p => p.CompanyLogo, this.Data?.CompanyLogo)

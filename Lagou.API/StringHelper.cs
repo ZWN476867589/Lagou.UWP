@@ -6,9 +6,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Reflection;
 using Lagou.API.Attributes;
+using AngleSharp.Parser.Html;
 
 namespace Lagou.API {
     public static class StringHelper {
+
+        private static readonly Regex HtmlClearReg = new Regex(@"<br[\s]*/?>", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// 從URL中取 Key / Value
@@ -193,5 +196,16 @@ namespace Lagou.API {
             return ErrorTypes.Unknow;
         }
 
+
+        public static string ClearHtml(this string html) {
+            if (string.IsNullOrWhiteSpace(html))
+                return html;
+
+            html = HtmlClearReg.Replace(html, Environment.NewLine);
+            var parser = new HtmlParser(); ;
+            using (var doc = parser.Parse(html)) {
+                return doc.DocumentElement.TextContent;
+            }
+        }
     }
 }

@@ -29,6 +29,11 @@ namespace Lagou.API {
         [ErrorTag("-2147012889")]
         Network,
 
-        LoginFailed
+        LoginFailed,
+
+        /// <summary>
+        /// 内容匹配错误
+        /// </summary>
+        MatchError
     }
 }

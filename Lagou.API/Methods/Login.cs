@@ -46,7 +46,6 @@ namespace Lagou.API.Methods {
             if (o.state != 1) {
                 this.Message = o.message;
                 this.ErrorType = ErrorTypes.LoginFailed;
-                this.HasError = true;
                 return false;
             } else
                 return true;

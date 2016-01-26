@@ -123,9 +123,12 @@
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\CitySelectorViewModel.cs" />
     <Compile Include="ViewModels\CompanyPositionsViewModel.cs" />
+    <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\DiscoverViewModel.cs" />
     <Compile Include="ViewModels\EvaluationViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RootFrameViewModel.cs" />
     <Compile Include="ViewModels\SearchBarViewModel.cs" />
     <Compile Include="ViewModels\SearchedItemViewModel.cs" />
@@ -141,8 +144,14 @@
     <Compile Include="Views\CompanyPositionsView.xaml.cs">
       <DependentUpon>CompanyPositionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CompanyView.xaml.cs">
+      <DependentUpon>CompanyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DiscoverView.xaml.cs">
       <DependentUpon>DiscoverView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IndexView.xaml.cs">
       <DependentUpon>IndexView.xaml</DependentUpon>
@@ -155,6 +164,9 @@
     </Compile>
     <Compile Include="Views\MyView.xaml.cs">
       <DependentUpon>MyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RootFrameView.xaml.cs">
       <DependentUpon>RootFrameView.xaml</DependentUpon>
@@ -229,7 +241,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DiscoverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
