@@ -43,7 +43,6 @@
                             <i:Interaction.Behaviors>
                                 <common:FlyoutBehavior IsClosed="{Binding NeedCloseCitySelector, Mode=TwoWay}" />
                             </i:Interaction.Behaviors>
-
                             <ContentControl cm:View.Model="{Binding CitySelectorVM}" />
                         </Flyout>
                     </Button.Flyout>

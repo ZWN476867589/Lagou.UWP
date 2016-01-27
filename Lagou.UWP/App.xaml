@@ -28,7 +28,7 @@
                 <ResourceDictionary Source="Styles/Pivot.xaml" />
                 <ResourceDictionary Source="Styles/AutoSuggestBox.xaml" />
                 <ResourceDictionary Source="Styles/ListView.xaml" />
-                <!--<ResourceDictionary Source="Styles/FlyoutPresenter.xaml" />-->
+                <ResourceDictionary Source="Styles/FlyoutPresenter.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <ResourceDictionary.ThemeDictionaries>

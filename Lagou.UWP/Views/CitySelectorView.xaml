@@ -33,55 +33,56 @@
             <SymbolIcon Symbol="Cancel" Foreground="White" />
         </Button>
 
-        <ScrollViewer Grid.Row="1">
-            <SemanticZoom>
-                <SemanticZoom.ZoomedInView>
-                    <ListView ItemsSource="{Binding Datas.View}" 
+        <SemanticZoom Grid.Row="1">
+            <SemanticZoom.ZoomedInView>
+                <ListView ItemsSource="{Binding Datas.View}" 
                   cm:Message.Attach="[Event SelectionChanged] = [Action Choice($this)]"
                   >
-                        <ListView.GroupStyle>
-                            <GroupStyle>
-                                <GroupStyle.HeaderTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Key}" 
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Key}" 
                                                Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
-                                    </DataTemplate>
-                                </GroupStyle.HeaderTemplate>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
 
-                            </GroupStyle>
-                        </ListView.GroupStyle>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
 
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Foreground="White" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </SemanticZoom.ZoomedInView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="White" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
 
-                <SemanticZoom.ZoomedOutView>
-                    <GridView ItemsSource="{Binding Datas.View.CollectionGroups}">
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Group.Key}" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+            <SemanticZoom.ZoomedOutView>
+                <GridView ItemsSource="{Binding Datas.View.CollectionGroups}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Group.Key}"
+                                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                                       />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
 
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapGrid  MaximumRowsOrColumns="4" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                    </GridView>
-                </SemanticZoom.ZoomedOutView>
-            </SemanticZoom>
-        </ScrollViewer>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid  MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
 
     </Grid>
+
 </UserControl>

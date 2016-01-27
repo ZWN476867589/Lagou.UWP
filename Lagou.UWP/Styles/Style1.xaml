@@ -61,10 +61,11 @@
     </Style>
 
     <!-- 浮动层 -->
-    <Style x:Key="flayout" TargetType="FlyoutPresenter">
+    <Style x:Key="flayout" TargetType="FlyoutPresenter" BasedOn="{StaticResource FixedFlyoutPresenter}">
         <Setter Property="Background" Value="#fa333333"/>
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="Padding" Value="5" />
     </Style>
 
 
