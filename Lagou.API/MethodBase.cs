@@ -17,6 +17,10 @@ namespace Lagou.API {
             get;
         }
 
+        protected virtual bool NeedLoginFirst {
+            get;
+        }
+
         public bool HasError {
             get {
                 return this.ErrorType != null;
@@ -46,12 +50,15 @@ namespace Lagou.API {
             try {
                 var url = this.BuildUrl(client.GetUrl(this));
                 using (var handler = new HttpClientHandler() {
-                    //CookieContainer = client.Cookies,
-                    UseCookies = this.WithCookies
+                    UseCookies = this.WithCookies,
+                    AllowAutoRedirect = !this.NeedLoginFirst
                 })
                 using (HttpClient hc = new HttpClient(handler)) {
                     return await hc.GetStringAsync(url);
                 }
+            } catch (HttpRequestException ex) when (this.NeedLoginFirst && ex.Message.IndexOf("302") > 0) {
+                this.ErrorType = ErrorTypes.NeedLogin;
+                return "";
             } catch (Exception ex) {
                 var bex = ex.GetBaseException();
 

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Lagou.API;
 using Lagou.UWP.Attributes;
 using Lagou.UWP.Common;
 using Lagou.UWP.ViewModels;
@@ -11,9 +12,12 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,6 +37,34 @@ namespace Lagou.UWP {
 
         public App() {
             InitializeComponent();
+            API.ApiClient.OnMessage += ApiClient_OnMessage;
+        }
+
+        private async void ApiClient_OnMessage(object sender, API.MessageArgs e) {
+            //var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+
+            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
+                this.DealMessage(e);
+            });
+        }
+
+        private async void DealMessage(MessageArgs e) {
+            switch (e.ErrorType) {
+                case ErrorTypes.NeedLogin:
+                    this._container.GetInstance<INavigationService>()
+                        .For<LoginViewModel>().Navigate();
+                    break;
+                case ErrorTypes.DNSError:
+                case ErrorTypes.Network:
+                    var dialog = new MessageDialog("当前网络不可用,请检查", "网络异常");
+                    await dialog.ShowAsync();
+                    break;
+                default:
+                    var dialog2 = new MessageDialog(e.Message, "提示");
+                    await dialog2.ShowAsync();
+                    break;
+            }
         }
 
         protected override void Configure() {

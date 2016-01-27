@@ -18,6 +18,12 @@ namespace Lagou.API.Methods {
             }
         }
 
+        protected override bool NeedLoginFirst {
+            get {
+                return true;
+            }
+        }
+
         protected override string Execute(string result) {
             return result;
         }

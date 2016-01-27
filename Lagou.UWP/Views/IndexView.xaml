@@ -21,7 +21,7 @@
     </common:TopHeader.Content>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid >
         <ListView ItemsSource="{Binding Datas}">
             <i:Interaction.Behaviors>
                 <common:ListViewPositionRestoreBehavior

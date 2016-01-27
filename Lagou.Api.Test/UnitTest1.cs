@@ -66,5 +66,11 @@ namespace Lagou.Api.Test {
 
             var c = ApiClient.Execute(mth).Result;
         }
+
+        [TestMethod]
+        public void ResumePreviewTest() {
+            var mth = new ResumePreview();
+            var c = ApiClient.Execute(mth).Result;
+        }
     }
 }

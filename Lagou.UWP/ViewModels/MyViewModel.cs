@@ -1,9 +1,12 @@
-﻿using Lagou.UWP.Attributes;
+﻿using Caliburn.Micro;
+using Lagou.UWP.Attributes;
+using Lagou.UWP.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Lagou.UWP.ViewModels {
 
@@ -21,8 +24,20 @@ namespace Lagou.UWP.ViewModels {
             }
         }
 
-        protected override void OnActivate() {
-            base.OnActivate();
+        public ICommand LoginCmd { get; set; }
+
+        public ICommand ViewResumeCmd { get; set; }
+
+        public MyViewModel(INavigationService ns) {
+            this.LoginCmd = new Command(() => {
+                ns.For<LoginViewModel>()
+                .Navigate();
+            });
+
+            this.ViewResumeCmd = new Command(() => {
+                ns.For<ResumeViewModel>()
+                .Navigate();
+            });
         }
     }
 }

@@ -133,7 +133,9 @@
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\JobDetailViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\ResumeViewModel.cs" />
     <Compile Include="ViewModels\RootFrameViewModel.cs" />
     <Compile Include="ViewModels\SearchBarViewModel.cs" />
     <Compile Include="ViewModels\SearchedItemViewModel.cs" />
@@ -170,11 +172,17 @@
     <Compile Include="Views\LocalFavoriteView.xaml.cs">
       <DependentUpon>LocalFavoriteView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MyView.xaml.cs">
       <DependentUpon>MyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResumeView.xaml.cs">
+      <DependentUpon>ResumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RootFrameView.xaml.cs">
       <DependentUpon>RootFrameView.xaml</DependentUpon>
@@ -277,11 +285,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResumeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

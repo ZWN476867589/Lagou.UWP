@@ -53,7 +53,6 @@ namespace Lagou.UWP.Common {
 
                 using (var fs = storage.CreateFile(tempJPEG)) {
                     var wb = new WriteableBitmap(img.PixelWidth, img.PixelHeight);
-                    
                     var encoder = await BitmapEncoder.CreateAsync(
                         BitmapEncoder.JpegEncoderId, 
                         null);
