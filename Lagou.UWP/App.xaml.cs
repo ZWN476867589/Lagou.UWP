@@ -100,6 +100,8 @@ namespace Lagou.UWP {
             if (args.PreviousExecutionState == ApplicationExecutionState.Terminated) {
                 _eventAggregator.PublishOnUIThread(new ResumeStateMessage());
             }
+
+            //this.ConnectXamlSpy();
         }
 
         protected override void OnSuspending(object sender, SuspendingEventArgs e) {
@@ -123,5 +125,10 @@ namespace Lagou.UWP {
         protected override void OnUnhandledException(object sender, UnhandledExceptionEventArgs e) {
             e.Handled = true;
         }
+
+        //private void ConnectXamlSpy() {
+        //    var service = FirstFloor.XamlSpy.Services.XamlSpyService.Current;
+        //    service.Connect("192.168.0.124", 4530, "41169");
+        //}
     }
 }

@@ -6,6 +6,7 @@ using Lagou.UWP.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -36,6 +37,20 @@ namespace Lagou.UWP.ViewModels {
         public ICommand LoadMoreCmd { get; set; }
 
         public ICommand ReloadCmd { get; set; }
+
+
+        #region used for ListView Position Restore
+        public Func<object, string> KeyFinder { get; set; }
+            = o => {
+                var item = (SearchedItemViewModel)o;
+                if (item != null) {
+                    return item.Data.PositionId.ToString();
+                }
+                return string.Empty;
+            };
+
+        public string PersistedItemKey { get; set; }
+        #endregion
 
         private string _city = "";
         private string _keyword = "";
@@ -103,5 +118,20 @@ namespace Lagou.UWP.ViewModels {
 
             this.IsBusy = false;
         }
+
+
+        // OnViewAttached -> OnViewReady -> OnViewLoaded
+
+        //protected override void OnViewAttached(object view, object context) {
+        //    base.OnViewAttached(view, context);
+        //}
+
+        //protected override void OnViewReady(object view) {
+        //    base.OnViewReady(view);
+        //}
+
+        //protected override void OnViewLoaded(object view) {
+        //    base.OnViewLoaded(view);
+        //}
     }
 }

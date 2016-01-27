@@ -70,6 +70,7 @@
                         <DataTemplate>
                             <TextBlock Text="{Binding Group.Key}"
                                        Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                                       FontSize="15"
                                        />
                         </DataTemplate>
                     </GridView.ItemTemplate>

@@ -18,7 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Lagou.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
   </PropertyGroup>
@@ -109,9 +109,12 @@
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\DebugListView.cs" />
     <Compile Include="Common\EventTypesToFontAwesomeConverter.cs" />
     <Compile Include="Common\FlyoutBehavior.cs" />
     <Compile Include="Common\HeaderTemplateSelector.cs" />
+    <Compile Include="Common\ListViewPositionRestoreBehavior.cs" />
+    <Compile Include="Common\MImageSource.cs" />
     <Compile Include="Common\TopHeader.cs" />
     <Compile Include="Common\ResumeStateMessage.cs" />
     <Compile Include="Common\SuspendStateMessage.cs" />
