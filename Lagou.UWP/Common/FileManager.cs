@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -16,6 +18,7 @@ namespace Lagou.UWP.Common {
         private IsolatedStorageFile ISF = null;
         private StorageFolder Folder = null;
 
+        private readonly AsyncLock _SaveLock = new AsyncLock();
 
         private FileManager() {
             this.ISF = IsolatedStorageFile.GetUserStoreForApplication();
@@ -24,14 +27,15 @@ namespace Lagou.UWP.Common {
 
         public async Task<Stream> GetStream(string file) {
             //return await this.Folder.OpenStreamForReadAsync(file);
+            using (await this._SaveLock.LockAsync()) {
+                if (string.IsNullOrWhiteSpace(file))
+                    throw new ArgumentNullException("file");
 
-            if (string.IsNullOrWhiteSpace(file))
-                throw new ArgumentNullException("file");
-
-            if (this.ISF.FileExists(file))
-                return await Task.FromResult(this.ISF.OpenFile(file, FileMode.Open));
-            else
-                return null;
+                if (this.ISF.FileExists(file))
+                    return await Task.FromResult(this.ISF.OpenFile(file, FileMode.Open, FileAccess.Read));
+                else
+                    return null;
+            }
         }
 
         public async Task Save(Stream stm, string file) {
@@ -43,6 +47,12 @@ namespace Lagou.UWP.Common {
         }
 
         public async Task Save(byte[] bytes, string file) {
+            using (await _SaveLock.LockAsync()) {
+                await this.InternalSave(bytes, file);
+            }
+        }
+
+        private async Task InternalSave(byte[] bytes, string file) {
             if (bytes == null || string.IsNullOrWhiteSpace(file))
                 throw new ArgumentNullException("stm or file is null");
 
@@ -63,9 +73,11 @@ namespace Lagou.UWP.Common {
         }
 
         public async Task<IRandomAccessStream> OpenFile(string file) {
-            var folder = await this.Folder.CreateFolderAsync(Path.GetDirectoryName(file), CreationCollisionOption.OpenIfExists);
-            var f = await folder.CreateFileAsync(Path.GetFileName(file), CreationCollisionOption.ReplaceExisting);
-            return await f.OpenAsync(FileAccessMode.ReadWrite);
+            using (await this._SaveLock.LockAsync()) {
+                var folder = await this.Folder.CreateFolderAsync(Path.GetDirectoryName(file), CreationCollisionOption.OpenIfExists);
+                var f = await folder.CreateFileAsync(Path.GetFileName(file), CreationCollisionOption.ReplaceExisting);
+                return await f.OpenAsync(FileAccessMode.ReadWrite);
+            }
         }
 
 

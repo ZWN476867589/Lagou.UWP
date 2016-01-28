@@ -87,7 +87,11 @@ namespace Lagou.UWP.Common {
 
         private static async void UriChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var thumb = (ThumbImageSource)d;
-            await thumb.Deal();
+            try {
+                await thumb.Deal();
+            } catch (Exception ex) {
+
+            }
         }
 
         public async Task Deal() {
@@ -174,12 +178,13 @@ namespace Lagou.UWP.Common {
                     BitmapEncoder.JpegEncoderId,
                     fs);
 
-                //encoder.BitmapTransform.ScaledWidth = (uint)width;
-                //encoder.BitmapTransform.ScaledHeight = (uint)height;
+                encoder.BitmapTransform.ScaledWidth = (uint)width;
+                encoder.BitmapTransform.ScaledHeight = (uint)height;
+                //encoder.BitmapTransform.Rotation = BitmapRotation.Clockwise90Degrees;
 
                 encoder.SetPixelData(
-                    BitmapPixelFormat.Rgba8,
-                    BitmapAlphaMode.Ignore,
+                    BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Straight,
                     (uint)wb.PixelWidth,
                     (uint)wb.PixelHeight,
                     96.0,

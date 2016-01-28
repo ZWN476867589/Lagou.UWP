@@ -108,6 +108,7 @@
     <Compile Include="Common\BindingProxy.cs" />
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
+    <Compile Include="Common\Class1.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\DebugListView.cs" />
     <Compile Include="Common\EventTypesToFontAwesomeConverter.cs" />
