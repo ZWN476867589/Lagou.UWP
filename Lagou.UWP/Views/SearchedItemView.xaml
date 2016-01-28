@@ -34,7 +34,9 @@
             <Ellipse.Fill>
                 <ImageBrush>
                     <ImageBrush.ImageSource>
-                        <BitmapImage UriSource="{Binding Data.CompanyLogoUri}" DecodePixelHeight="100" DecodePixelWidth="100" />
+                        <BitmapImage UriSource="{Binding Data.CompanyLogoUri}" 
+                                     DecodePixelHeight="100" DecodePixelWidth="100"
+                                     />
                     </ImageBrush.ImageSource>
                 </ImageBrush>
             </Ellipse.Fill>

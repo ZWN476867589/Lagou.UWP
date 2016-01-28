@@ -10,13 +10,17 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -35,36 +39,14 @@ namespace Lagou.UWP {
 
         private RootFrameViewModel _rootFrameVM = null;
 
+        private int _blackBtnClickCount = 0;
+
+        //private Popup _quitNotice = null;
+
+        private CoreDispatcher _dispatcher = null;
+
         public App() {
             InitializeComponent();
-            API.ApiClient.OnMessage += ApiClient_OnMessage;
-        }
-
-        private async void ApiClient_OnMessage(object sender, API.MessageArgs e) {
-            //var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
-            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
-
-            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                this.DealMessage(e);
-            });
-        }
-
-        private async void DealMessage(MessageArgs e) {
-            switch (e.ErrorType) {
-                case ErrorTypes.NeedLogin:
-                    this._container.GetInstance<INavigationService>()
-                        .For<LoginViewModel>().Navigate();
-                    break;
-                case ErrorTypes.DNSError:
-                case ErrorTypes.Network:
-                    var dialog = new MessageDialog("当前网络不可用,请检查", "网络异常");
-                    await dialog.ShowAsync();
-                    break;
-                default:
-                    var dialog2 = new MessageDialog(e.Message, "提示");
-                    await dialog2.ShowAsync();
-                    break;
-            }
         }
 
         protected override void Configure() {
@@ -101,19 +83,10 @@ namespace Lagou.UWP {
             ViewModelBinder.Bind(model, view, null);
             this._rootFrameVM = (RootFrameViewModel)model;
 
-            view.Frm.Navigated += Frm_Navigated;
-
             //Must set frame's datacontext as null
             //if not set null, will show nothing.
             view.Frm.DataContext = null;
             return view.Frm;
-        }
-
-        private void Frm_Navigated(object sender, NavigationEventArgs e) {
-            //var ele = (Page)e.Content;
-            ////var template = TopHeader.GetContentTemplate(ele);
-            //var content = TopHeader.GetContent(ele);
-            //this._rootFrameVM.Header = content;
         }
 
         /// <summary>
@@ -122,6 +95,22 @@ namespace Lagou.UWP {
         /// <param name="args"></param>
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
             this.DisplayRootView<ShellView>();
+
+            this._dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+            API.ApiClient.OnMessage += ApiClient_OnMessage;
+            //this._quitNotice = new Popup() {
+            //    Child = new QuitTip(),
+            //    HorizontalOffset = 0,
+            //    VerticalOffset = 0,
+            //    HorizontalAlignment = HorizontalAlignment.Stretch,
+            //    VerticalAlignment = VerticalAlignment.Top,
+            //    Width = 200,
+            //    Height = 30
+            //};
+
+            //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
+            //    HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            //}
 
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) {
                 var statusBar = StatusBar.GetForCurrentView();
@@ -158,9 +147,54 @@ namespace Lagou.UWP {
             e.Handled = true;
         }
 
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e) {
+            Task.Delay(1000).ContinueWith(t => {
+                this._blackBtnClickCount = 0;
+            });
+            //if (++this._blackBtnClickCount == 1) {
+            //    this._quitNotice.Visibility = Visibility.Visible;
+            //    this._quitNotice.IsOpen = true;
+            //    Task.Delay(1000).ContinueWith(async t => {
+            //        await this._dispatcher.RunAsync(CoreDispatcherPriority.High, () => {
+            //            //this._quitNotice.IsOpen = false;
+            //        });
+            //    });
+            //}
+            if (this._blackBtnClickCount == 2) {
+                App.Current.Exit();
+            } else
+                e.Handled = true;
+        }
+
+        private async void ApiClient_OnMessage(object sender, API.MessageArgs e) {
+            await this._dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
+                this.DealMessage(e);
+            });
+        }
+
+        private async void DealMessage(MessageArgs e) {
+            switch (e.ErrorType) {
+                case ErrorTypes.NeedLogin:
+                    this._container.GetInstance<INavigationService>()
+                        .For<LoginViewModel>().Navigate();
+                    break;
+                case ErrorTypes.DNSError:
+                case ErrorTypes.Network:
+                    var dialog = new MessageDialog("当前网络不可用,请检查", "网络异常");
+                    await dialog.ShowAsync();
+                    break;
+                default:
+                    var dialog2 = new MessageDialog(e.Message, "提示");
+                    await dialog2.ShowAsync();
+                    break;
+            }
+        }
+
         //private void ConnectXamlSpy() {
         //    var service = FirstFloor.XamlSpy.Services.XamlSpyService.Current;
         //    service.Connect("192.168.0.124", 4530, "41169");
         //}
+
     }
 }
