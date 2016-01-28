@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cm="using:Caliburn.Micro"
+    xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -34,6 +35,20 @@
                 <ImageBrush ImageSource="{Binding Data.CompanyLogoUri}" />
             </Ellipse.Fill>
         </Ellipse>
+
+        <!--<Ellipse Width="60" Height="60" 
+                Stroke="#cccccccc" StrokeThickness="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Grid.RowSpan="3">
+            <Ellipse.Fill>
+                <ImageBrush>
+                    <ImageBrush.ImageSource>
+                        <common:ThumbImageSource Width="60" Height="60" UriSource="{Binding Data.CompanyLogoUri}" />
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>-->
 
         <TextBlock Text="{Binding Data.CompanyName}" Grid.Column="1" Style="{StaticResource l_h1}" />
         <TextBlock Text="{Binding Data.PositionName}" Grid.Column="1" Grid.Row="1" Style="{StaticResource l_h2}" />

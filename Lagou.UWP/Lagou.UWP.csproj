@@ -111,10 +111,13 @@
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\DebugListView.cs" />
     <Compile Include="Common\EventTypesToFontAwesomeConverter.cs" />
+    <Compile Include="Common\FileManager.cs" />
     <Compile Include="Common\FlyoutBehavior.cs" />
     <Compile Include="Common\HeaderTemplateSelector.cs" />
     <Compile Include="Common\ListViewPositionRestoreBehavior.cs" />
-    <Compile Include="Common\MImageSource.cs" />
+    <Compile Include="Common\StreamHelper.cs" />
+    <Compile Include="Common\ThumbImageSource.cs" />
+    <Compile Include="Common\NetworkManager.cs" />
     <Compile Include="Common\TopHeader.cs" />
     <Compile Include="Common\ResumeStateMessage.cs" />
     <Compile Include="Common\SuspendStateMessage.cs" />

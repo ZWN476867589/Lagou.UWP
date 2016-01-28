@@ -6,10 +6,9 @@
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Newtonsoft.Json": "8.0.2"
-    //,
-    //"XamlSpy": "3.0.1-preview",
-    //"XamlSpyLibs": "3.0.1-preview"
+    "Newtonsoft.Json": "8.0.2",
+    "System.Runtime.WindowsRuntime": "4.0.10",
+    "Win2D.uwp": "1.14.0"
   },
   "frameworks": {
     "uap10.0": {}
