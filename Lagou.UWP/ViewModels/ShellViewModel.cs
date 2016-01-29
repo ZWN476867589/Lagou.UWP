@@ -50,11 +50,5 @@ namespace Lagou.UWP.ViewModels {
             //_eventAggregator.Subscribe(this);
             base.OnActivate();
         }
-
-        public void ChangeHeader(Pivot p) {
-            var model = p.SelectedItem;
-            var view = ViewLocator.LocateForModel(model, null, null);
-            TopHeader.LastHeaderFrom = view;
-        }
     }
 }

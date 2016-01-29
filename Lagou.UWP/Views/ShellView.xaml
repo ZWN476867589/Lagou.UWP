@@ -12,11 +12,11 @@
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Grid.Row="1"
+        <Pivot x:Name="pivot" Grid.Row="1"
                ItemsSource="{Binding Datas}" 
                Style="{StaticResource BottomHeaderPivot}"
-               cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"
                >
+            <!--cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"-->
             <!--cm:Message.Attach="[Event SelectionChanged] = [Action ChangeHeader($source)]"-->
             <!--$view shellView-->
             <!--source pivot-->

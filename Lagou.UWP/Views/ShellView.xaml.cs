@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using Lagou.UWP.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,26 @@ namespace Lagou.UWP.Views {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            this.pivot.SelectionChanged += Pivot_SelectionChanged;
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            this.ChangeHeader(this.pivot);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            base.OnNavigatedTo(e);
+            // 因为将 NavigationCacheMode 设为了 Enabled , 导至 TopHeader.Content 没有重新赋值
+            // 至使头没有更新
+            this.ChangeHeader(this.pivot);
+        }
+
+        public void ChangeHeader(Pivot p) {
+            var model = p.SelectedItem;
+            if (model != null) {
+                var view = ViewLocator.LocateForModel(model, null, null);
+                TopHeader.LastHeaderFrom = view;
+            }
         }
     }
 }
