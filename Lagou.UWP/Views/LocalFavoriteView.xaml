@@ -9,10 +9,8 @@
     mc:Ignorable="d">
 
     <common:TopHeader.Content>
-        <ContentControl>
-            <TextBlock Text="AAA" />
-        </ContentControl>
-    </common:TopHeader.Content>    
+        <TextBlock Text="本地收藏" Padding="10" />
+    </common:TopHeader.Content>   
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

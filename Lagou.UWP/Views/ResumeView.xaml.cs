@@ -23,5 +23,6 @@ namespace Lagou.UWP.Views {
         public ResumeView() {
             this.InitializeComponent();
         }
+
     }
 }

@@ -5,9 +5,48 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="我的简历" Command="{Binding ViewResumeCmd}" />
-    </Grid>
+    <common:TopHeader.Content>
+        <TextBlock Text="我的信息" Padding="10" />
+    </common:TopHeader.Content>
+
+    <GridView ItemsSource="{Binding Datas}" Padding="5"
+                  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                  >
+        <GridView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapGrid Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </GridView.ItemsPanel>
+        <GridView.ItemTemplate>
+            <DataTemplate>
+                <Border
+                        BorderBrush="#cccccc" CornerRadius="5" 
+                        BorderThickness="1"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"                        
+                        >
+
+                    <Button Background="Transparent" 
+                            BorderThickness="0" 
+                            Width="100" Height="100"
+                            Command="{Binding Cmd}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <FontIcon Glyph="{Binding Glyph}" FontFamily="{StaticResource FontAwesome}" Grid.Row="0" />
+                                <TextBlock Text="{Binding Text}" Grid.Row="1" />
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                </Border>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+    </GridView>
+
 </Page>

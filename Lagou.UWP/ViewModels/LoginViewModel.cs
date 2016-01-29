@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -34,11 +37,13 @@ namespace Lagou.UWP.ViewModels {
 
         public string Captcha { get; set; }
 
-        public ImageSource CaptchSource { get; set; }
+        public ImageSource CaptchaSource { get; set; }
 
         public ICommand ReloadCaptcha { get; set; }
 
         public ICommand LoginCmd { get; set; }
+
+        public ICommand CancelCmd { get; set; }
 
         private INavigationService NS = null;
 
@@ -47,6 +52,7 @@ namespace Lagou.UWP.ViewModels {
 
             this.ReloadCaptcha = new Command(async () => await this.LoadCaptcha());
             this.LoginCmd = new Command(async () => await this.Login());
+            this.CancelCmd = new Command(() => { this.Cancel(); });
         }
 
 
@@ -60,7 +66,7 @@ namespace Lagou.UWP.ViewModels {
             base.OnDeactivate(close);
             if (this.Stm != null) {
                 this.Stm.Dispose();
-                this.CaptchSource = null;
+                this.CaptchaSource = null;
             }
         }
 
@@ -71,30 +77,39 @@ namespace Lagou.UWP.ViewModels {
                 this.Stm.Dispose();
             this.Stm = new MemoryStream(bytes);
             //TODO
-            //this.CaptchSource = new BitmapImage(); //StreamImageSource.FromStream(() => this.Stm);
-            this.NotifyOfPropertyChange(() => this.CaptchSource);
+            var img = new BitmapImage();
+            await img.SetSourceAsync(this.Stm.AsRandomAccessStream());
+            this.CaptchaSource = img;
+            this.NotifyOfPropertyChange(() => this.CaptchaSource);
         }
 
         private async Task Login() {
             this.IsBusy = true;
 
             var mth = new Login() {
-                UserName = this.UserName,
-                Password = this.Pwd,
-                VerifyCode = this.Captcha
+                UserName = this.UserName ?? "",
+                Password = this.Pwd ?? "",
+                VerifyCode = this.Captcha ?? ""
             };
             var flag = await ApiClient.Execute(mth);
 
             this.IsBusy = false;
 
-            //if (flag) {
-            //    await Application.Current.MainPage.DisplayAlert("提示", "登陆成功", "OK");
-            //    await this.NS.GoBackAsync();
-            //} else {
-            //    await Application.Current.MainPage.DisplayAlert("提示", mth.Message, "OK");
-            //}
+            if (flag) {
+                var dialog = new MessageDialog("登陆成功", "提示");
+                await dialog.ShowAsync();
+                this.NS.GoBack(2);
+            } else {
+                var dialog = new MessageDialog(mth.Message, "提示");
+                await dialog.ShowAsync();
+            }
         }
 
+
+        private void Cancel() {
+            //this.NS.ResumeState();
+            this.NS.GoBack(2);
+        }
 
         ~LoginViewModel() {
             Dispose(false);

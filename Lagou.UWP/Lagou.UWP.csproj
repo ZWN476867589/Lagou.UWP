@@ -109,6 +109,7 @@
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Class1.cs" />
+    <Compile Include="Common\WebBrowserHtmlContent.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\DebugListView.cs" />
     <Compile Include="Common\EventTypesToFontAwesomeConverter.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Common\FlyoutBehavior.cs" />
     <Compile Include="Common\HeaderTemplateSelector.cs" />
     <Compile Include="Common\ListViewPositionRestoreBehavior.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\StreamHelper.cs" />
     <Compile Include="Common\ThumbImageSource.cs" />
     <Compile Include="Common\NetworkManager.cs" />
@@ -210,6 +212,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Imgs\lagou.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -341,9 +344,7 @@
       <Name>Lagou.API</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Imgs\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

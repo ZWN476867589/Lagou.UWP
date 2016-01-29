@@ -23,6 +23,8 @@ namespace Lagou.UWP.Views {
     public sealed partial class ShellView : Page {
         public ShellView() {
             this.InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

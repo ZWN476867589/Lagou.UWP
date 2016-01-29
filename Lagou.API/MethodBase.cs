@@ -46,25 +46,43 @@ namespace Lagou.API {
             }
         }
 
-        public async virtual Task<string> GetResult(ApiClient client) {
-            try {
-                var url = this.BuildUrl(client.GetUrl(this));
-                using (var handler = new HttpClientHandler() {
-                    UseCookies = this.WithCookies,
-                    AllowAutoRedirect = !this.NeedLoginFirst
-                })
-                using (HttpClient hc = new HttpClient(handler)) {
-                    return await hc.GetStringAsync(url);
-                }
-            } catch (HttpRequestException ex) when (this.NeedLoginFirst && ex.Message.IndexOf("302") > 0) {
-                this.ErrorType = ErrorTypes.NeedLogin;
-                return "";
-            } catch (Exception ex) {
-                var bex = ex.GetBaseException();
+        private async Task PrepareLoginCookie(string url) {
+            using (var handler2 = new HttpClientHandler() {
+                UseCookies = true,
+                AllowAutoRedirect = true
+            })
+            using (var hc2 = new HttpClient(handler2)) {
+                await hc2.GetStringAsync(url);
+            }
+        }
 
-                this.ErrorType = bex.HResult.ToString().ParseErrorType();
-                this.Message = bex.Message;
-                return "";
+        public async virtual Task<string> GetResult(ApiClient client) {
+
+            var url = this.BuildUrl(client.GetUrl(this));
+            using (var handler = new HttpClientHandler() {
+                UseCookies = this.WithCookies,
+                AllowAutoRedirect = !this.NeedLoginFirst
+            })
+            using (HttpClient hc = new HttpClient(handler)) {
+                try {
+                    var msg = await hc.GetAsync(url);
+                    //只有 AllowAutoRedirect 为 false 时,才会捕捉到 Headers.Location
+                    if (this.NeedLoginFirst && msg.Headers.Location != null && msg.Headers.Location.Host.Equals("passport.lagou.com")) {
+                        this.ErrorType = ErrorTypes.NeedLogin;
+                        await this.PrepareLoginCookie(url);
+                        return "";
+                    } else
+                        return await msg.Content.ReadAsStringAsync();
+
+                    //GetStringAsync 会把 302 当作异常抛出
+                    //return await hc.GetStringAsync(url);
+                } catch (Exception ex) {
+                    var bex = ex.GetBaseException();
+
+                    this.ErrorType = bex.HResult.ToString().ParseErrorType();
+                    this.Message = bex.Message;
+                    return "";
+                }
             }
         }
     }

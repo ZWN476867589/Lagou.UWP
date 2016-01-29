@@ -22,6 +22,8 @@ namespace Lagou.UWP.Views {
     public sealed partial class IndexView {
         public IndexView() {
             this.InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

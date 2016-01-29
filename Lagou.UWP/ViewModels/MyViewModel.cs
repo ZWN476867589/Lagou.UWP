@@ -28,6 +28,8 @@ namespace Lagou.UWP.ViewModels {
 
         public ICommand ViewResumeCmd { get; set; }
 
+        public List<Tmp> Datas { get; set; }
+
         public MyViewModel(INavigationService ns) {
             this.LoginCmd = new Command(() => {
                 ns.For<LoginViewModel>()
@@ -38,6 +40,20 @@ namespace Lagou.UWP.ViewModels {
                 ns.For<ResumeViewModel>()
                 .Navigate();
             });
+
+            this.Datas = new List<Tmp>() {
+                new Tmp() {Text = "我的投递", Glyph = (char)0xf21c },
+                new Tmp() {Text = "我的面试", Glyph = (char)0xf0c0 },
+                new Tmp() {Text = "我的邀约", Glyph = (char)0xf095 },
+                new Tmp() {Text = "我的收藏", Glyph = (char)0xf004 },
+                new Tmp() {Text = "我的简历", Glyph = (char)0xf1c2, Cmd= this.ViewResumeCmd }
+            };
+        }
+
+        public class Tmp {
+            public char Glyph { get; set; }
+            public string Text { get; set; }
+            public ICommand Cmd { get; set; }
         }
     }
 }

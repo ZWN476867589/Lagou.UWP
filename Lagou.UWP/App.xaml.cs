@@ -176,8 +176,9 @@ namespace Lagou.UWP {
         private async void DealMessage(MessageArgs e) {
             switch (e.ErrorType) {
                 case ErrorTypes.NeedLogin:
-                    this._container.GetInstance<INavigationService>()
-                        .For<LoginViewModel>().Navigate();
+                    var ns = this._container.GetInstance<INavigationService>();
+                    //ns.SuspendState();
+                    ns.For<LoginViewModel>().Navigate();
                     break;
                 case ErrorTypes.DNSError:
                 case ErrorTypes.Network:

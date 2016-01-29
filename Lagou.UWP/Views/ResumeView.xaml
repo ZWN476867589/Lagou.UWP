@@ -5,9 +5,19 @@
     xmlns:local="using:Lagou.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d">
 
+    <common:TopHeader.Content>
+        <TextBlock Text="我的简历" Padding="10" />
+    </common:TopHeader.Content>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView />
+        <WebView common:WebBrowserHtmlContent.Html="{Binding Data}" />
+
+        <ProgressRing Style="{StaticResource pageBusy}"
+                      Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                      IsActive="{Binding IsBusy}"
+                      />
     </Grid>
 </Page>

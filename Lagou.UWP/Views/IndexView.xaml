@@ -23,12 +23,13 @@
 
     <Grid >
         <ListView ItemsSource="{Binding Datas}">
-            <i:Interaction.Behaviors>
+            <!--设置 Page 的 NavigationCacheMode 为 Enable 或 Required, 页面会被缓存,就不需要这个了 -->
+            <!--<i:Interaction.Behaviors>
                 <common:ListViewPositionRestoreBehavior
                     Identity="{Binding KeyFinder}"
                      PersistedItemKey="{Binding PersistedItemKey, Mode=TwoWay}"
                     />
-            </i:Interaction.Behaviors>
+            </i:Interaction.Behaviors>-->
 
             <ListView.ItemTemplate>
                 <DataTemplate>

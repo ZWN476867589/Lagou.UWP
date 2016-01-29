@@ -9,11 +9,9 @@
     mc:Ignorable="d">
 
     <common:TopHeader.Content>
-        <ContentControl>
-            <TextBlock Text="TTT" />
-        </ContentControl>
+        <TextBlock Text="资讯" Padding="10" />
     </common:TopHeader.Content>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     </Grid>

@@ -8,18 +8,50 @@
     xmlns:common="using:Lagou.UWP.Common"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          Padding="5"
-          >
-        <StackPanel VerticalAlignment="Center" 
-                    HorizontalAlignment="Stretch"
-                    common:UniMargin.Margin="2"
-                    >
-            <TextBox Text="{Binding UserName}" />
-            <Rectangle Style="{StaticResource b_h}" />
-            <PasswordBox Password="{Binding Pwd}" />
-            <Rectangle Style="{StaticResource b_h}" />
-            <Button Content="登陆" />
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0.5" />
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="0.5" />
+        </Style>
+    </Page.Resources>
+
+    <common:TopHeader.Content>
+        <TextBlock Text="用户登陆" Padding="10" />
+    </common:TopHeader.Content>
+
+
+    <Grid Margin="40,0" common:UniMargin.Margin="5"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            VerticalAlignment="Center"
+              >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Image Source="ms-appx:///Imgs/lagou.png" 
+               Width="80" Height="40"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+        <Rectangle Style="{StaticResource b_h}" Grid.Row="1" />
+
+        <TextBox Text="{Binding UserName, Mode=TwoWay}" PlaceholderText="用户名" Grid.Row="2" />
+        <PasswordBox Password="{Binding Pwd,Mode=TwoWay}" PlaceholderText="密码" Grid.Row="3" />
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Image Width="100" Height="30" Source="{Binding CaptchaSource}" />
+            <TextBox Text="{Binding Captcha,Mode=TwoWay}" />
         </StackPanel>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Accept" Command="{Binding LoginCmd}" />
+            <AppBarButton Icon="Cancel" Command="{Binding CancelCmd}" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
