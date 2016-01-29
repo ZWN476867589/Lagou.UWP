@@ -47,7 +47,7 @@
                Style="{StaticResource BottomHeaderPivot}"
                >
             <PivotItem Header="介绍">
-                <ScrollViewer>
+                <ScrollViewer Padding="5">
                     <TextBlock Text="{Binding Data.Introduction.Desc}" 
                                TextWrapping="Wrap" 
                                Style="{StaticResource l_text}" />

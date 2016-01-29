@@ -14,8 +14,12 @@
         <ListView ItemsSource="{Binding Datas}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <StackPanel common:UniMargin.Margin="4">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="0.5" />
+                        </Grid.RowDefinitions>
+                        <StackPanel common:UniMargin.Margin="4" HorizontalAlignment="Stretch">
                             <TextBlock Text="{Binding Name}" Style="{StaticResource l_h2}" />
                             <Rectangle Stroke="#cccccc" StrokeThickness="0.5" 
                                        RadiusX="5" RadiusY="5"
@@ -27,8 +31,8 @@
                             </Rectangle>
                             <TextBlock Text="{Binding Desc}" Style="{StaticResource l_text}" />
                         </StackPanel>
-                        <Rectangle Style="{StaticResource b_h}" />
-                    </StackPanel>
+                        <Rectangle Style="{StaticResource b_h}" Grid.Row="1" />
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
