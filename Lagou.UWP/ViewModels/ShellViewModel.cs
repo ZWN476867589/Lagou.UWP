@@ -15,12 +15,12 @@ namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
     public class ShellViewModel : Screen {
 
-        //private readonly IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
 
         public BindableCollection<BaseVM> Datas { get; set; } = new BindableCollection<BaseVM>();
 
         public ShellViewModel(SimpleContainer container, IEventAggregator eventAggregator) {
-            //this._eventAggregator = eventAggregator;
+            this._eventAggregator = eventAggregator;
 
             this.Datas.CollectionChanged += Datas_CollectionChanged;
 

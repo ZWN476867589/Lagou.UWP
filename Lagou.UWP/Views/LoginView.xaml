@@ -33,6 +33,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Image Source="ms-appx:///Imgs/lagou.png" 
@@ -46,6 +47,7 @@
             <Image Width="100" Height="30" Source="{Binding CaptchaSource}" />
             <TextBox Text="{Binding Captcha,Mode=TwoWay}" />
         </StackPanel>
+        <ToggleSwitch Grid.Row="5" Header="记住密码" IsOn="{Binding RememberPwd}" />
     </Grid>
 
     <Page.BottomAppBar>

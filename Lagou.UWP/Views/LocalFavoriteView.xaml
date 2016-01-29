@@ -6,13 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
+    xmlns:cal="using:Caliburn.Micro"
     mc:Ignorable="d">
 
     <common:TopHeader.Content>
         <TextBlock Text="本地收藏" Padding="10" />
-    </common:TopHeader.Content>   
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    </common:TopHeader.Content>
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView ItemsSource="{Binding Datas}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="0.5" />
+                        </Grid.RowDefinitions>
+                        <ContentControl cal:View.Model="{Binding}" HorizontalContentAlignment="Stretch" Padding="0,5" />
+                        <Rectangle Fill="#cccccccc" Height="0.5" Grid.Row="1" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </Grid>
 </Page>

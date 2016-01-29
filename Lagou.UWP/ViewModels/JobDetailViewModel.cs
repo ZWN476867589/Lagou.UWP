@@ -21,6 +21,8 @@ namespace Lagou.UWP.ViewModels {
             }
         }
 
+
+
         public Position Data { get; set; }
 
         public BindableCollection<EvaluationViewModel> Evaluations {
@@ -64,22 +66,26 @@ namespace Lagou.UWP.ViewModels {
             }
         }
 
-        private INavigationService NS = null;
+        private readonly INavigationService NS = null;
 
-        public JobDetailViewModel(INavigationService ns) {
+        private readonly IEventAggregator _eventAggregator;
+
+        public JobDetailViewModel(INavigationService ns, IEventAggregator eventAggregator) {
+            this.NS = ns;
+            this._eventAggregator = eventAggregator;
+            this._eventAggregator.Subscribe(this);
+
             this.SeeAllCmd = new Command(() =>
                 this.SeeAll()
             );
 
-            this.AddFavoriteCmd = new Command(() => {
-                this.AddFavorite();
+            this.AddFavoriteCmd = new Command(async () => {
+                await this.AddFavorite();
             });
 
             this.ShowCompanyCmd = new Command(() => {
                 this.ShowCompany();
             });
-
-            this.NS = ns;
         }
 
 
@@ -139,8 +145,8 @@ namespace Lagou.UWP.ViewModels {
                 .Navigate();
         }
 
-        private void AddFavorite() {
-            //MessagingCenter.Send(this, FavoritesViewModel.AddFavorite, this.Data);
+        private async Task AddFavorite() {
+            await this._eventAggregator.PublishOnUIThreadAsync(this.Data);
         }
     }
 }

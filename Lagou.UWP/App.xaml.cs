@@ -43,8 +43,6 @@ namespace Lagou.UWP {
 
         //private Popup _quitNotice = null;
 
-        private CoreDispatcher _dispatcher = null;
-
         public App() {
             InitializeComponent();
         }
@@ -96,7 +94,6 @@ namespace Lagou.UWP {
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
             this.DisplayRootView<ShellView>();
 
-            this._dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
             API.ApiClient.OnMessage += ApiClient_OnMessage;
             //this._quitNotice = new Popup() {
             //    Child = new QuitTip(),
@@ -168,9 +165,7 @@ namespace Lagou.UWP {
         }
 
         private async void ApiClient_OnMessage(object sender, API.MessageArgs e) {
-            await this._dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () => {
-                this.DealMessage(e);
-            });
+            await DispatcherHelper.Run(() => this.DealMessage(e));
         }
 
         private async void DealMessage(MessageArgs e) {

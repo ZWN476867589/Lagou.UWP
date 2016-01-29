@@ -109,6 +109,9 @@
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Class1.cs" />
+    <Compile Include="Common\DispatcherHelper.cs" />
+    <Compile Include="Common\Properties.cs" />
+    <Compile Include="Common\PropertiesKeys.cs" />
     <Compile Include="Common\WebBrowserHtmlContent.cs" />
     <Compile Include="Common\Command.cs" />
     <Compile Include="Common\DebugListView.cs" />

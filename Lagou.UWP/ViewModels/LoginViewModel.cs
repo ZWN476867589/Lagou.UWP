@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
     public class LoginViewModel : BasePageVM, IDisposable {
+
         public override string Title {
             get {
                 return "登陆";
@@ -34,6 +35,8 @@ namespace Lagou.UWP.ViewModels {
         public string UserName { get; set; }
 
         public string Pwd { get; set; }
+
+        public bool RememberPwd { get; set; }
 
         public string Captcha { get; set; }
 
@@ -59,6 +62,11 @@ namespace Lagou.UWP.ViewModels {
         private Stream Stm = null;
 
         protected async override void OnActivate() {
+            this.RememberPwd = Properties.Get<bool>(PropertiesKeys.RememberPwd.ToString());
+            if (this.RememberPwd) {
+                this.Pwd = Properties.Get<string>(PropertiesKeys.Pwd.ToString());
+                this.UserName = Properties.Get<string>(PropertiesKeys.UserName.ToString());
+            }
             await this.LoadCaptcha();
         }
 
@@ -99,6 +107,10 @@ namespace Lagou.UWP.ViewModels {
                 var dialog = new MessageDialog("登陆成功", "提示");
                 await dialog.ShowAsync();
                 this.NS.GoBack(2);
+
+                Properties.Set(PropertiesKeys.RememberPwd.ToString(), this.RememberPwd);
+                Properties.Set(PropertiesKeys.UserName.ToString(), this.UserName);
+                Properties.Set(PropertiesKeys.Pwd.ToString(), this.Pwd);
             } else {
                 var dialog = new MessageDialog(mth.Message, "提示");
                 await dialog.ShowAsync();

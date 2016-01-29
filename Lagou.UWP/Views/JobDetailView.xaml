@@ -21,7 +21,7 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Favorite" Label="收藏到本地" />
+            <AppBarButton Icon="Favorite" Label="收藏到本地" Command="{Binding AddFavoriteCmd}" />
             <AppBarButton Icon="List" Label="所有职位" Command="{Binding SeeAllCmd}" />
             <AppBarButton Icon="Globe" Label="公司信息" Command="{Binding ShowCompanyCmd}" />
         </CommandBar>
