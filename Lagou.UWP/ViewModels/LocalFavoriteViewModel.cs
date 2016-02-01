@@ -48,9 +48,7 @@ namespace Lagou.UWP.ViewModels {
 
             this.SwipCmd = new Command((args) => {
                 var e = (ItemSwipeEventArgs)args;
-                if (e == null)
-                    return;
-
+                
                 if (e.Direction == SwipeListDirection.Right)
                     this.Remove(e.SwipedItem);
             });

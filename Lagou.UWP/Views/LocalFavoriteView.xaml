@@ -19,6 +19,7 @@
             ItemsSource="{Binding Datas}"
             common:EventCommand.Event="ItemSwipe"
             common:EventCommand.Command="{Binding SwipCmd}"
+            common:EventCommand.EventArgsAsParameter="True"
             >
 
             <swip:SwipeListView.ItemLeftContentTemplate>
