@@ -33,6 +33,25 @@ namespace Lagou.UWP.Common {
                 typeof(EventCommand),
                 new PropertyMetadata(null, CmdChanged));
 
+
+        public static readonly DependencyProperty EventArgsAsParameterProperty =
+            DependencyProperty.RegisterAttached(
+                "EventArgsAsParameter",
+                typeof(bool),
+                typeof(EventCommand),
+                new PropertyMetadata(false));
+
+
+
+
+
+
+
+
+
+
+
+
         public static void SetEvent(FrameworkElement target, string value) {
             target.SetValue(EventProperty, value);
         }
@@ -57,6 +76,21 @@ namespace Lagou.UWP.Common {
             return (object)target.GetValue(CommandParameterProperty);
         }
 
+        public static void SetEventArgsAsParameter(FrameworkElement target, bool value) {
+            target.SetValue(EventArgsAsParameterProperty, value);
+        }
+
+        public static bool GetEventArgsAsParameter(FrameworkElement target) {
+            return (bool)target.GetValue(EventArgsAsParameterProperty);
+        }
+
+
+
+
+
+
+
+
         private static void CmdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var t = d.GetType();
             var evtName = GetEvent((FrameworkElement)d);
@@ -76,7 +110,7 @@ namespace Lagou.UWP.Common {
                     ////sender maybe not attached objected.
                     //FireCommand(sender, args as RoutedEventArgs);
 
-                    FireCommand(d);
+                    FireCommand(d, args);
                 };
                 var invoke = typeof(Action<object, object>).GetRuntimeMethod("Invoke", new[] { typeof(object), typeof(object) });
                 var @delegate = invoke.CreateDelegate(delegateType, handler);
@@ -88,19 +122,17 @@ namespace Lagou.UWP.Common {
             }
         }
 
-        //private static void FireCommand(object sender, RoutedEventArgs routedEventArgs) {
-        //    var ele = (FrameworkElement)sender;
-        //    var cmd = GetCommand(ele);
-        //    var parm = GetCommandParameter(ele);
-        //    if (cmd != null && cmd.CanExecute(parm)) {
-        //        cmd.Execute(parm);
-        //    }
-        //}
-
-        private static void FireCommand(DependencyObject d) {
+        private static void FireCommand(DependencyObject d, object args) {
             var ele = (FrameworkElement)d;
             var cmd = GetCommand(ele);
-            var parm = GetCommandParameter(ele);
+            var argAsParam = GetEventArgsAsParameter(ele);
+
+            object parm = null;
+            if (argAsParam)
+                parm = GetCommandParameter(ele);
+            else
+                parm = args;
+
             if (cmd != null && cmd.CanExecute(parm)) {
                 cmd.Execute(parm);
             }

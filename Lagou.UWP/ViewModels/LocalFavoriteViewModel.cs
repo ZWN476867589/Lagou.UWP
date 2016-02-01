@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Universal.UI.Xaml.Controls;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Popups;
 
@@ -32,6 +34,7 @@ namespace Lagou.UWP.ViewModels {
 
         public BindableCollection<SearchedItemViewModel> Datas { get; set; }
 
+        public ICommand SwipCmd { get; set; }
 
         private INavigationService NS = null;
         private IEventAggregator EVA = null;
@@ -40,6 +43,12 @@ namespace Lagou.UWP.ViewModels {
             this.NS = ns;
             this.EVA = eva;
             eva.Subscribe(this);
+
+            this.SwipCmd = new Command((args) => {
+                var e = (ItemSwipeEventArgs)args;
+                if (e.Direction == SwipeListDirection.Right)
+                    this.Remove(e.SwipedItem);
+            });
 
             this.Favorites = Properties.Get<List<Position>>(PropertiesKeys.Favorites.ToString()) ?? new List<Position>();
             this.Datas = new BindableCollection<SearchedItemViewModel>();
@@ -91,6 +100,11 @@ namespace Lagou.UWP.ViewModels {
 
         private void SaveFavorite() {
             Properties.SetObject(PropertiesKeys.Favorites.ToString(), this.Favorites);
+        }
+
+
+        private void Remove(object item) {
+
         }
     }
 }
