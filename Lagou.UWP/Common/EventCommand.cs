@@ -66,6 +66,8 @@ namespace Lagou.UWP.Common {
                 //Adding or removing event handlers dynamically is not supported on WinRT events.
                 //evt.AddEventHandler(d, new TypedEventHandler<DependencyObject, object>(EventDelegate));
 
+                // http://stackoverflow.com/questions/16647198/how-to-dynamically-bind-event-to-command-in-winrt-without-reactive-framework
+
                 var addMethod = evt.AddMethod;
                 var removeMethod = evt.RemoveMethod;
                 var addParameters = addMethod.GetParameters();
