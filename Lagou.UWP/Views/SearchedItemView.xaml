@@ -7,14 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cm="using:Caliburn.Micro"
     xmlns:common="using:Lagou.UWP.Common"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
     >
-    <!--不知道哪里的错误, 导至 ShowDetail 会多次触发, 但是通过 Command 绑定的就只会执行一次-->
+
+    <!--Caliburn.Micro Bug-->
+    <!--If page's NavigationCacheMode enabled or required, CM will attach event muti time-->
     <!--cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"-->
-    
-    <Grid cm:Message.Attach="[Event Tapped] = [Action ShowDetail]">
+
+    <i:Interaction.Behaviors>
+        <common:TapGestureBehavior Command="{Binding TapCmd}" />
+    </i:Interaction.Behaviors>
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
