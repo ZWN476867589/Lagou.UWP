@@ -11,15 +11,17 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
+    common:EventCommand.Command="{Binding TapCmd}"
+    common:EventCommand.Event="Tapped"
     >
 
     <!--Caliburn.Micro Bug-->
     <!--If page's NavigationCacheMode enabled or required, CM will attach event muti time-->
     <!--cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"-->
 
-    <i:Interaction.Behaviors>
+    <!--<i:Interaction.Behaviors>
         <common:TapGestureBehavior Command="{Binding TapCmd}" />
-    </i:Interaction.Behaviors>
+    </i:Interaction.Behaviors>-->
 
     <Grid>
         <Grid.RowDefinitions>

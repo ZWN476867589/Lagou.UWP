@@ -22,9 +22,6 @@ namespace Lagou.UWP.Views {
     public sealed partial class IndexView {
         public IndexView() {
             this.InitializeComponent();
-
-            //在 Pivot 中, 这个不起作用, 起作用的是 Pivot 所在的页
-            //this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

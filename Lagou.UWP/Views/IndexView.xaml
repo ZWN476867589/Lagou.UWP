@@ -23,9 +23,14 @@
 
 
     <Grid >
-        <pu:PullToRefreshBox 
-            cm:Message.Attach="[Event RefreshInvoked] = [Action ReloadData]"
+        <pu:PullToRefreshBox
+            common:EventCommand.Command="{Binding ReloadCmd}"
+            common:EventCommand.Event="RefreshInvoked"
             >
+            <!--Bug on Caliburn.Micro when page's NavigationCacheMode set as Enabled or Required-->
+            <!--cm:Message.Attach="[Event RefreshInvoked] = [Action ReloadData]"-->
+
+            
             <!--<pu:PullToRefreshBox.TopIndicatorTemplate>
                 <DataTemplate>
                     <pu:PullRefreshProgressControl Progress="{Binding}">

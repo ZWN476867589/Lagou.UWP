@@ -9,6 +9,7 @@
     xmlns:common="using:Lagou.UWP.Common"
     xmlns:vm="using:Lagou.UWP.ViewModels"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -33,7 +34,7 @@
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>
-                       
+
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel>
