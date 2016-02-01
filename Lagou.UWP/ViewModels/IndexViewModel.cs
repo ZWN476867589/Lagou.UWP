@@ -88,7 +88,11 @@ namespace Lagou.UWP.ViewModels {
             }
         }
 
-        private async Task LoadData(bool reload = false) {
+        public async Task ReloadData() {
+            await this.LoadData(true);
+        }
+
+        public async Task LoadData(bool reload = false) {
             if (this.Datas == null) {
                 this.Datas = new BindableCollection<SearchedItemViewModel>();
                 this.NotifyOfPropertyChange(() => this.Datas);
@@ -113,7 +117,8 @@ namespace Lagou.UWP.ViewModels {
                     new SearchedItemViewModel(d, this.NS)
                 ));
 
-                this._page++;
+                //this._page++;
+                this._page = reload ? 2 : this._page++;
             }
 
             this.IsBusy = false;

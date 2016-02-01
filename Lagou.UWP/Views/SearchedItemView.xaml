@@ -10,10 +10,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"
     >
-
-    <Grid>
+    <!--不知道哪里的错误, 导至 ShowDetail 会多次触发, 但是通过 Command 绑定的就只会执行一次-->
+    <!--cm:Message.Attach="[Event Tapped] = [Action ShowDetail]"-->
+    
+    <Grid cm:Message.Attach="[Event Tapped] = [Action ShowDetail]">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />

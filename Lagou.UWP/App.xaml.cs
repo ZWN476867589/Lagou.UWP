@@ -39,10 +39,6 @@ namespace Lagou.UWP {
 
         private RootFrameViewModel _rootFrameVM = null;
 
-        private int _blackBtnClickCount = 0;
-
-        //private Popup _quitNotice = null;
-
         public App() {
             InitializeComponent();
         }
@@ -94,20 +90,8 @@ namespace Lagou.UWP {
         protected override void OnLaunched(LaunchActivatedEventArgs args) {
             this.DisplayRootView<ShellView>();
 
-            API.ApiClient.OnMessage += ApiClient_OnMessage;
-            //this._quitNotice = new Popup() {
-            //    Child = new QuitTip(),
-            //    HorizontalOffset = 0,
-            //    VerticalOffset = 0,
-            //    HorizontalAlignment = HorizontalAlignment.Stretch,
-            //    VerticalAlignment = VerticalAlignment.Top,
-            //    Width = 200,
-            //    Height = 30
-            //};
-
-            //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
-            //    HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            //}
+            ApiMessageHandler.Init();
+            HardwareButtonsHelper.Init();
 
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) {
                 var statusBar = StatusBar.GetForCurrentView();
@@ -145,47 +129,7 @@ namespace Lagou.UWP {
         }
 
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e) {
-            Task.Delay(1000).ContinueWith(t => {
-                this._blackBtnClickCount = 0;
-            });
-            //if (++this._blackBtnClickCount == 1) {
-            //    this._quitNotice.Visibility = Visibility.Visible;
-            //    this._quitNotice.IsOpen = true;
-            //    Task.Delay(1000).ContinueWith(async t => {
-            //        await this._dispatcher.RunAsync(CoreDispatcherPriority.High, () => {
-            //            //this._quitNotice.IsOpen = false;
-            //        });
-            //    });
-            //}
-            if (this._blackBtnClickCount == 2) {
-                App.Current.Exit();
-            } else
-                e.Handled = true;
-        }
 
-        private async void ApiClient_OnMessage(object sender, API.MessageArgs e) {
-            await DispatcherHelper.Run(() => this.DealMessage(e));
-        }
-
-        private async void DealMessage(MessageArgs e) {
-            switch (e.ErrorType) {
-                case ErrorTypes.NeedLogin:
-                    var ns = this._container.GetInstance<INavigationService>();
-                    //ns.SuspendState();
-                    ns.For<LoginViewModel>().Navigate();
-                    break;
-                case ErrorTypes.DNSError:
-                case ErrorTypes.Network:
-                    var dialog = new MessageDialog("当前网络不可用,请检查", "网络异常");
-                    await dialog.ShowAsync();
-                    break;
-                default:
-                    var dialog2 = new MessageDialog(e.Message, "提示");
-                    await dialog2.ShowAsync();
-                    break;
-            }
-        }
 
         //private void ConnectXamlSpy() {
         //    var service = FirstFloor.XamlSpy.Services.XamlSpyService.Current;

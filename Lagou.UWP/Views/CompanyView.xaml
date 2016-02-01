@@ -53,8 +53,8 @@
                                Style="{StaticResource l_text}" />
                 </ScrollViewer>
             </PivotItem>
-            <PivotItem Header="产品" FontSize="12">
-                <ContentControl cm:View.Model="{Binding ProductsVM}" />
+            <PivotItem Header="产品">
+                <ContentControl cm:View.Model="{Binding ProductsVM}" HorizontalContentAlignment="Stretch" />
             </PivotItem>
             
             <PivotItem Header="团队">

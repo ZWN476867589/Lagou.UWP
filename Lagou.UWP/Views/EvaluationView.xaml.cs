@@ -13,18 +13,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Lagou.UWP.Views {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
-    public sealed partial class IndexView {
-        public IndexView() {
+    public sealed partial class EvaluationView : UserControl {
+        public EvaluationView() {
             this.InitializeComponent();
-
-            //在 Pivot 中, 这个不起作用, 起作用的是 Pivot 所在的页
-            //this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

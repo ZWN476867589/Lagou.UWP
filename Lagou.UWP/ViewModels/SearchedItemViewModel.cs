@@ -12,7 +12,7 @@ using Windows.UI.Xaml;
 
 namespace Lagou.UWP.ViewModels {
 
-    [Regist(InstanceMode.PreRequest)]
+    [Regist(InstanceMode.None)]
     public class SearchedItemViewModel : BaseVM {
 
         public PositionBrief Data {

@@ -105,11 +105,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attributes\RegistAttribute.cs" />
+    <Compile Include="Common\ApiMessageHandler.cs" />
     <Compile Include="Common\BindingProxy.cs" />
     <Compile Include="Common\BoolToVisibilityConverter.cs" />
     <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\Class1.cs" />
     <Compile Include="Common\DispatcherHelper.cs" />
+    <Compile Include="Common\HardwareButtonsHelper.cs" />
     <Compile Include="Common\Properties.cs" />
     <Compile Include="Common\PropertiesKeys.cs" />
     <Compile Include="Common\WebBrowserHtmlContent.cs" />
@@ -165,6 +167,9 @@
     </Compile>
     <Compile Include="Views\DiscoverView.xaml.cs">
       <DependentUpon>DiscoverView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EvaluationView.xaml.cs">
+      <DependentUpon>EvaluationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
@@ -272,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DiscoverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EvaluationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

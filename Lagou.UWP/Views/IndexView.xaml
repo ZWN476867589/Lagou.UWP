@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:pu="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     >
 
@@ -22,36 +23,47 @@
 
 
     <Grid >
-        <ListView ItemsSource="{Binding Datas}">
-            <!--设置 Page 的 NavigationCacheMode 为 Enable 或 Required, 页面会被缓存,就不需要这个了 -->
-            <!--<i:Interaction.Behaviors>
+        <pu:PullToRefreshBox 
+            cm:Message.Attach="[Event RefreshInvoked] = [Action ReloadData]"
+            >
+            <!--<pu:PullToRefreshBox.TopIndicatorTemplate>
+                <DataTemplate>
+                    <pu:PullRefreshProgressControl Progress="{Binding}">
+
+                    </pu:PullRefreshProgressControl>
+                </DataTemplate>
+            </pu:PullToRefreshBox.TopIndicatorTemplate>-->
+
+            <ListView ItemsSource="{Binding Datas}">
+                <!--设置 Page 的 NavigationCacheMode 为 Enable 或 Required, 页面会被缓存,就不需要这个了 -->
+                <!--<i:Interaction.Behaviors>
                 <common:ListViewPositionRestoreBehavior
                     Identity="{Binding KeyFinder}"
                      PersistedItemKey="{Binding PersistedItemKey, Mode=TwoWay}"
                     />
             </i:Interaction.Behaviors>-->
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="0.5" />
-                        </Grid.RowDefinitions>
-                        <ContentControl cm:View.Model="{Binding}" HorizontalContentAlignment="Stretch" Padding="0,5" />
-                        <Rectangle Fill="#cccccccc" Height="0.5" Grid.Row="1" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="0.5" />
+                            </Grid.RowDefinitions>
+                            <ContentControl cm:View.Model="{Binding}" HorizontalContentAlignment="Stretch" Padding="0,5" />
+                            <Rectangle Fill="#cccccccc" Height="0.5" Grid.Row="1" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-            <ListView.FooterTemplate>
-                <DataTemplate>
-                    <Grid Padding="5">
-                        <Button Content="加载更多" HorizontalAlignment="Stretch" 
+                <ListView.FooterTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <Button Content="加载更多" HorizontalAlignment="Stretch" 
                             Command="{Binding LoadMoreCmd}"
                             />
 
-                        <ProgressRing
+                            <ProgressRing
                               Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
                               IsActive="{Binding IsBusy}"
                               VerticalAlignment="Stretch"
@@ -59,11 +71,11 @@
                               VerticalContentAlignment="Center"
                               HorizontalContentAlignment="Center"
                               />
-                    </Grid>
-                </DataTemplate>
-            </ListView.FooterTemplate>
-        </ListView>
-
+                        </Grid>
+                    </DataTemplate>
+                </ListView.FooterTemplate>
+            </ListView>
+        </pu:PullToRefreshBox>
         <ProgressRing Style="{StaticResource pageBusy}"
                       Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
                       IsActive="{Binding IsBusy}"

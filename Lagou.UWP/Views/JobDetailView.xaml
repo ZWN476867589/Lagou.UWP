@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:Lagou.UWP.Common"
+    xmlns:cal="using:Caliburn.Micro"
     mc:Ignorable="d"
     >
 
@@ -140,6 +141,15 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                     />
+
+                    <ListView Visibility="{Binding HasEvaluations, Converter={StaticResource bool2Visibility}}"
+                                ItemsSource="{Binding Evaluations}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl cal:View.Model="{Binding}" HorizontalContentAlignment="Stretch" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </ScrollViewer>
             <!--//评论-->

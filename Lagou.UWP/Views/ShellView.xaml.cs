@@ -26,7 +26,9 @@ namespace Lagou.UWP.Views {
         public ShellView() {
             this.InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            //https://github.com/Caliburn-Micro/Caliburn.Micro/issues/51
+            //导至 SearchedItemView 中的 ShowDetail 多次执行
+            //this.NavigationCacheMode = NavigationCacheMode.Enabled;
             this.pivot.SelectionChanged += Pivot_SelectionChanged;
         }
 
