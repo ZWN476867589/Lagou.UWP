@@ -104,7 +104,10 @@ namespace Lagou.UWP.ViewModels {
 
 
         private void Remove(object item) {
-
+            var model = (SearchedItemViewModel)item;
+            this.Datas.Remove(model);
+            this.Favorites.RemoveAll(p => p.PositionID == model.Data.PositionId);
+            this.SaveFavorite();
         }
     }
 }
