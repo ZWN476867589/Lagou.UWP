@@ -115,10 +115,14 @@ namespace Lagou.UWP.Common {
                 var invoke = typeof(Action<object, object>).GetRuntimeMethod("Invoke", new[] { typeof(object), typeof(object) });
                 var @delegate = invoke.CreateDelegate(delegateType, handler);
 
-                Func<object, EventRegistrationToken> add = a => (EventRegistrationToken)addMethod.Invoke(d, new object[] { @delegate });
-                Action<EventRegistrationToken> remove = tt => removeMethod.Invoke(d, new object[] { tt });
+                try {
+                    Func<object, EventRegistrationToken> add = a => (EventRegistrationToken)addMethod.Invoke(d, new object[] { @delegate });
+                    Action<EventRegistrationToken> remove = tt => removeMethod.Invoke(d, new object[] { tt });
 
-                WindowsRuntimeMarshal.AddEventHandler(add, remove, handler);
+                    WindowsRuntimeMarshal.AddEventHandler(add, remove, handler);
+                } catch {
+
+                }
             }
         }
 
@@ -128,7 +132,7 @@ namespace Lagou.UWP.Common {
             var argAsParam = GetEventArgsAsParameter(ele);
 
             object parm = null;
-            if (argAsParam)
+            if (!argAsParam)
                 parm = GetCommandParameter(ele);
             else
                 parm = args;

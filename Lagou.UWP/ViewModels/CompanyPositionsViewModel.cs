@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace Lagou.UWP.ViewModels {
     /// <summary>
@@ -49,7 +50,11 @@ namespace Lagou.UWP.ViewModels {
 
         public BindableCollection<PositionBrief> Datas { get; set; } = new BindableCollection<PositionBrief>();
 
-        public PositionBrief SelectedPosition { get; set; }
+        public ICommand ShowPositionCmd { get; set; }
+
+        public ICommand LoadMoreCmd { get; set; }
+
+        public ICommand ShowCompanyCmd { get; set; }
 
         public override char Glyph {
             get {
@@ -63,6 +68,19 @@ namespace Lagou.UWP.ViewModels {
 
         public CompanyPositionsViewModel(INavigationService ns) {
             this.NS = ns;
+
+            this.ShowPositionCmd = new Command((arg) => {
+                var e = (SelectionChangedEventArgs)arg;
+                this.ShowPosition((PositionBrief)e.AddedItems.FirstOrDefault());
+            });
+
+            this.LoadMoreCmd = new Command(async () => {
+                await this.LoadPosByType();
+            });
+
+            this.ShowCompanyCmd = new Command(() => {
+                this.ShowCompany();
+            });
         }
 
         protected async override void OnActivate() {
@@ -101,10 +119,21 @@ namespace Lagou.UWP.ViewModels {
             await this.LoadPosByType();
         }
 
-        public void ShowPosition() {
+        public void ShowPosition(PositionBrief pos) {
+            if (pos == null)
+                return;
+
             this.NS
                 .For<JobDetailViewModel>()
-                .WithParam(p => p.ID, this.SelectedPosition.PositionId)
+                .WithParam(p => p.ID, pos.PositionId)
+                .Navigate();
+        }
+
+        private void ShowCompany() {
+            this.NS.For<CompanyViewModel>()
+                .WithParam(p => p.CompanyID, this.CompanyID)
+                .WithParam(p => p.CompanyName, this.CompanyName)
+                .WithParam(p => p.CompanyLogo, this.CompanyLogo)
                 .Navigate();
         }
     }

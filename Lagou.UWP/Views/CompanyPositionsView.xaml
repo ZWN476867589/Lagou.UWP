@@ -11,7 +11,7 @@
     <Page.Resources>
         <common:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Page.Resources>
-    
+
     <common:TopHeader.Content>
         <TextBlock Text="{Binding Source={StaticResource Proxy},Path=Data.CompanyName}" Margin="10" />
     </common:TopHeader.Content>
@@ -38,7 +38,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <HyperlinkButton Content="公司简介" Grid.Column="1" Grid.Row="0" />
+        <HyperlinkButton Content="公司简介" Grid.Column="1" Grid.Row="0" Command="{Binding ShowCompanyCmd}" />
 
         <ComboBox ItemsSource="{Binding PositionTypes}" 
                   Grid.Column="1" 
@@ -51,7 +51,14 @@
 
         <Rectangle Style="{StaticResource b_h}" Grid.Row="2" Grid.ColumnSpan="2" />
 
-        <ListView ItemsSource="{Binding Datas}" Grid.Row="3" Grid.ColumnSpan="2">
+        <ListView ItemsSource="{Binding Datas}" 
+                  Grid.Row="3" 
+                  Grid.ColumnSpan="2"
+                  SelectionMode="Single"
+                  common:EventCommand.Command="{Binding ShowPositionCmd}"
+                  common:EventCommand.Event="SelectionChanged"
+                  common:EventCommand.EventArgsAsParameter="True"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -73,6 +80,25 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
+            <ListView.FooterTemplate>
+                <DataTemplate>
+                    <Grid Padding="5">
+                        <Button Content="加载更多" HorizontalAlignment="Stretch" 
+                            Command="{Binding LoadMoreCmd}"
+                            />
+
+                        <ProgressRing
+                              Visibility="{Binding IsBusy, Converter={StaticResource bool2Visibility}}" 
+                              IsActive="{Binding IsBusy}"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              VerticalContentAlignment="Center"
+                              HorizontalContentAlignment="Center"
+                              />
+                    </Grid>
+                </DataTemplate>
+            </ListView.FooterTemplate>
         </ListView>
 
         <ProgressRing Style="{StaticResource pageBusy}"

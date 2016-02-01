@@ -8,7 +8,8 @@ namespace Lagou.UWP.Common {
     public enum PropertiesKeys {
         UserName,
         Pwd,
-        Favorites,
+        //Favorites's data too big, not suit save into Propertities.
+        //Favorites, 
         RememberPwd
     }
 }

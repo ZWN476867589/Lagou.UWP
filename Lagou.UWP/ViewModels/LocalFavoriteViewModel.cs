@@ -17,6 +17,8 @@ namespace Lagou.UWP.ViewModels {
     [Regist(InstanceMode.Singleton)]
     public class LocalFavoriteViewModel : BasePageVM, IHandle<Position> {
 
+        private static readonly string FAVORITE_FILE = "datas/Favorites.json";
+
         public override string Title {
             get {
                 return "本地收藏";
@@ -46,15 +48,23 @@ namespace Lagou.UWP.ViewModels {
 
             this.SwipCmd = new Command((args) => {
                 var e = (ItemSwipeEventArgs)args;
+                if (e == null)
+                    return;
+
                 if (e.Direction == SwipeListDirection.Right)
                     this.Remove(e.SwipedItem);
             });
 
-            this.Favorites = Properties.Get<List<Position>>(PropertiesKeys.Favorites.ToString()) ?? new List<Position>();
+            this.LoadData();
+        }
+
+        private async void LoadData() {
+            this.Favorites = await FileManager.Instance.Value.ReadFromJson<List<Position>>(FAVORITE_FILE) ?? new List<Position>();
+            //Properties.Get<List<Position>>(PropertiesKeys.Favorites.ToString()) ?? new List<Position>();
             this.Datas = new BindableCollection<SearchedItemViewModel>();
             var datas = this.Favorites.Select(f => {
                 var d = this.Convert(f);
-                return new SearchedItemViewModel(d, ns);
+                return new SearchedItemViewModel(d, this.NS);
             });
 
             this.Datas.AddRange(datas);
@@ -98,8 +108,9 @@ namespace Lagou.UWP.ViewModels {
             this.SaveFavorite();
         }
 
-        private void SaveFavorite() {
-            Properties.SetObject(PropertiesKeys.Favorites.ToString(), this.Favorites);
+        private async void SaveFavorite() {
+            //Properties.SetObject(PropertiesKeys.Favorites.ToString(), this.Favorites);
+            await FileManager.Instance.Value.SaveAsJson(this.Favorites, FAVORITE_FILE);
         }
 
 

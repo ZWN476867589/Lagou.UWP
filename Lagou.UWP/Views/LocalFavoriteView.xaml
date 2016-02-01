@@ -37,7 +37,7 @@
             </swip:SwipeListView.ItemRightContentTemplate>
 
             <swip:SwipeListView.ItemContainerStyle>
-                <Style TargetType="uwp:SwipeListViewItem">
+                <Style TargetType="swip:SwipeListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="Padding" Value="0"/>
                 </Style>

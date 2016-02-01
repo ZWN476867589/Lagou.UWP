@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -38,6 +39,25 @@ namespace Lagou.UWP.Common {
             }
         }
 
+        public async Task<string> ReadFile(string file) {
+            var stm = await this.GetStream(file);
+            if (stm != null) {
+                using (var sr = new StreamReader(stm)) {
+                    return await sr.ReadToEndAsync();
+                }
+            } else {
+                return string.Empty;
+            }
+        }
+
+        public async Task<T> ReadFromJson<T>(string file) {
+            var str = await this.ReadFile(file);
+            if (string.IsNullOrWhiteSpace(str))
+                return default(T);
+
+            return JsonConvert.DeserializeObject<T>(str);
+        }
+
         public async Task Save(Stream stm, string file) {
             if (stm == null || string.IsNullOrWhiteSpace(file))
                 throw new ArgumentNullException("stm or file is null");
@@ -47,9 +67,31 @@ namespace Lagou.UWP.Common {
         }
 
         public async Task Save(byte[] bytes, string file) {
+            if (bytes == null)
+                throw new ArgumentNullException("bytes");
+
+            if (bytes.Length == 0)
+                return;
+
             using (await _SaveLock.LockAsync()) {
                 await this.InternalSave(bytes, file);
             }
+        }
+
+        public async Task Save(string ctx, string file) {
+            if (string.IsNullOrWhiteSpace(ctx))
+                return;
+
+            var bytes = Encoding.UTF8.GetBytes(ctx);
+            await Save(bytes, file);
+        }
+
+        public async Task SaveAsJson<T>(T t, string file) {
+            if (t == null)
+                return;
+
+            var json = JsonConvert.SerializeObject(t);
+            await this.Save(json, file);
         }
 
         private async Task InternalSave(byte[] bytes, string file) {
